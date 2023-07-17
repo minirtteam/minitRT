@@ -6,7 +6,7 @@
 /*   By: hyunghki <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 10:38:10 by hyunghki          #+#    #+#             */
-/*   Updated: 2023/07/17 12:39:35 by hyunghki         ###   ########.fr       */
+/*   Updated: 2023/07/17 14:50:43 by hyunghki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ long long	ft_atoi(char *s)
 
 double	ft_atod(char *s)
 {
-	int		sign;
 	double	ret;
 	int		i;
 	int		n;

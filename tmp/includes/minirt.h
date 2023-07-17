@@ -1,28 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print.c                                            :+:      :+:    :+:   */
+/*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyunghki <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/17 10:39:11 by hyunghki          #+#    #+#             */
-/*   Updated: 2023/07/17 14:11:05 by hyunghki         ###   ########.fr       */
+/*   Created: 2023/07/17 14:17:55 by hyunghki          #+#    #+#             */
+/*   Updated: 2023/07/17 14:52:09 by hyunghki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef MINIRT_H
+# define MINIRT_H
+
+#include <unistd.h>
+#include <fcntl.h>
 #include "utils.h"
 
-void	ft_putstr_fd(char *s, int fd)
-{
-	while (*s)
-	{
-		write(fd, s, 1);
-		s++;
-	}
-}
+t_lst	*ft_parse(char *file_name);
 
-void	ft_error(void)
-{
-	ft_putstr_fd("Error\n", 2);
-	exit(EXIT_FAILURE);
-}
+#endif

@@ -6,7 +6,7 @@
 /*   By: hyunghki <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 10:21:49 by hyunghki          #+#    #+#             */
-/*   Updated: 2023/07/17 11:10:05 by hyunghki         ###   ########.fr       */
+/*   Updated: 2023/07/17 16:04:38 by hyunghki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,12 +54,12 @@ char	*ft_trim(char *s)
 {
 	int	i;
 
-	while (*s && (*s == ' ' || *s == '\t'))
+	while (ft_str_find(" \n\t\v\f\r", *s) != -1)
 		s++;
 	i = ft_strlen(s) - 1;
 	while (i >= 0)
 	{
-		if (s[i] != ' ' && s[i] != '\t')
+		if (ft_str_find(" \n\t\v\f\r", s[i]) != -1)
 			break ;
 		s[i] = '\0';
 		i--;
