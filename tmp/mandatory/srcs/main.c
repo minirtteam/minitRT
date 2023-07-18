@@ -6,11 +6,10 @@
 /*   By: hyunghki <hyunghki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 14:06:36 by hyunghki          #+#    #+#             */
-/*   Updated: 2023/07/18 10:32:53 by hyunghki         ###   ########.fr       */
+/*   Updated: 2023/07/18 10:43:53 by hyunghki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
 #include "parse.h"
 #include "utils.h"
 
