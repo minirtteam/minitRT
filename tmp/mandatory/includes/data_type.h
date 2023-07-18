@@ -6,7 +6,7 @@
 /*   By: hyunghki <hyunghki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 07:35:44 by hyunghki          #+#    #+#             */
-/*   Updated: 2023/07/18 10:32:09 by hyunghki         ###   ########.fr       */
+/*   Updated: 2023/07/18 13:05:04 by hyunghki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,10 @@ typedef struct s_lst
 
 typedef struct s_amb
 {
-	double			ratio;
-	unsigned int	r;
-	unsigned int	g;
-	unsigned int	b;
+	double	ratio;
+	double	r;
+	double	g;
+	double	b;
 }	t_amb;
 
 typedef struct s_cam
@@ -52,52 +52,52 @@ typedef struct s_cam
 
 typedef struct s_light
 {
-	double			x;
-	double			y;
-	double			z;
-	double			ratio;
-	unsigned int	r;
-	unsigned int	g;
-	unsigned int	b;
+	double	x;
+	double	y;
+	double	z;
+	double	ratio;
+	double	r;
+	double	g;
+	double	b;
 }	t_light;
 
 typedef struct s_sphere
 {
-	double			x;
-	double			y;
-	double			z;
-	double			diameter;
-	unsigned int	r;
-	unsigned int	g;
-	unsigned int	b;
+	double	x;
+	double	y;
+	double	z;
+	double	diameter;
+	double	r;
+	double	g;
+	double	b;
 }	t_sphere;
 
 typedef struct s_plane
 {
-	double			x;
-	double			y;
-	double			z;
-	double			x_axis;
-	double			y_axis;
-	double			z_axis;
-	unsigned int	r;
-	unsigned int	g;
-	unsigned int	b;
+	double	x;
+	double	y;
+	double	z;
+	double	x_axis;
+	double	y_axis;
+	double	z_axis;
+	double	r;
+	double	g;
+	double	b;
 }	t_plane;
 
 typedef struct s_cylinder
 {
-	double			x;
-	double			y;
-	double			z;
-	double			x_axis;
-	double			y_axis;
-	double			z_axis;
-	double			diameter;
-	double			height;
-	unsigned int	r;
-	unsigned int	g;
-	unsigned int	b;
+	double	x;
+	double	y;
+	double	z;
+	double	x_axis;
+	double	y_axis;
+	double	z_axis;
+	double	diameter;
+	double	height;
+	double	r;
+	double	g;
+	double	b;
 }	t_cylinder;
 
 #endif

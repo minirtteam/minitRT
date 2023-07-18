@@ -6,7 +6,7 @@
 /*   By: hyunghki <hyunghki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 10:38:10 by hyunghki          #+#    #+#             */
-/*   Updated: 2023/07/18 10:55:46 by hyunghki         ###   ########.fr       */
+/*   Updated: 2023/07/18 13:06:15 by hyunghki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,29 +37,6 @@ static double	get_num(char *s)
 	if ((s[0] == '-' || s[0] == '+') && i == 1)
 		ft_error();
 	return (res * sign);
-}
-
-// atou함수의 경우 rgb값을 파싱할 때에만 사용됩니다.
-// 그래서 범위를 0~255의 값만 받을 수 있게 했습니다.
-unsigned int	ft_atou(char *s)
-{
-	unsigned int	res;
-	int				i;
-
-	if (s == NULL)
-		return (0);
-	res = 0;
-	i = (*s == '+');
-	while (s[i])
-	{
-		if (s[i] < '0' || s[i] > '9' || (res == 25 && s[i] > '5'))
-			ft_error();
-		res = res * 10 + s[i] - '0';
-		i++;
-	}
-	if (s[0] == '+' && i == 1)
-		ft_error();
-	return (res);
 }
 
 double	ft_atod(char *s)

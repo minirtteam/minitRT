@@ -6,7 +6,7 @@
 /*   By: hyunghki <hyunghki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 06:51:55 by hyunghki          #+#    #+#             */
-/*   Updated: 2023/07/18 10:32:04 by hyunghki         ###   ########.fr       */
+/*   Updated: 2023/07/18 13:07:37 by hyunghki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ void	ft_get_axis(double *x, double *y, double *z, char *s)
 		ft_error();
 }
 
-void	ft_get_rgb(unsigned int *r, unsigned int *g, unsigned int *b, char *s)
+void	ft_get_rgb(double *r, double *g, double *b, char *s)
 {
 	int	i;
 
@@ -104,13 +104,19 @@ void	ft_get_rgb(unsigned int *r, unsigned int *g, unsigned int *b, char *s)
 	if (i == -1)
 		ft_error();
 	s[i] = '\0';
-	(*r) = ft_atou(s);
+	(*r) = ft_atod(s);
+	if (*r < 0 || *r > 255)
+		ft_error();
 	s += (i + 1);
 	i = ft_str_find(s, ',');
 	if (i == -1)
 		ft_error();
 	s[i] = '\0';
-	(*g) = ft_atou(s);
+	(*g) = ft_atod(s);
+	if (*g < 0 || *g > 255)
+		ft_error();
 	s += (i + 1);
-	(*b) = ft_atou(s);
+	(*b) = ft_atod(s);
+	if (*b < 0 || *b > 255)
+		ft_error();
 }

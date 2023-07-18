@@ -6,7 +6,7 @@
 #    By: hyunghki <hyunghki@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/17 17:57:28 by hyunghki          #+#    #+#              #
-#    Updated: 2023/07/18 11:30:23 by hyunghki         ###   ########.fr        #
+#    Updated: 2023/07/18 11:34:59 by hyunghki         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,8 @@ NAME= miniRT
 CFLAGS= -Wall -Werror -Wextra
 DEBUG_FLAGS= -g3 -fsanitize=address
 LDFLAGS= \
--Lmlx -lmlx -framework OpenGL -framework Appkit
+-Lmlx -lmlx -framework OpenGL -framework Appkit \
+-lm
 INCLUDE= \
 -I./mandatory/includes \
 -Imlx

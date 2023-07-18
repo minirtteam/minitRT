@@ -6,7 +6,7 @@
 /*   By: hyunghki <hyunghki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 14:06:36 by hyunghki          #+#    #+#             */
-/*   Updated: 2023/07/18 10:43:53 by hyunghki         ###   ########.fr       */
+/*   Updated: 2023/07/18 13:08:32 by hyunghki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ static void	ft_test(t_amb *amb, t_cam *cam, t_lst *lights, t_lst *objs)
 	else
 	{
 		printf("ratio: %lf\n", amb->ratio);
-		printf("r: %u\n", amb->r);
-		printf("g: %u\n", amb->g);
-		printf("b: %u\n", amb->b);
+		printf("r: %lf\n", amb->r);
+		printf("g: %lf\n", amb->g);
+		printf("b: %lf\n", amb->b);
 	}
 	printf("\n\n");
 	printf("\e[32mtype: cam\e[0m\n");
@@ -46,9 +46,9 @@ static void	ft_test(t_amb *amb, t_cam *cam, t_lst *lights, t_lst *objs)
 		printf("y: %lf\n", data->y);
 		printf("z: %lf\n", data->z);
 		printf("ratio: %lf\n", data->ratio);
-		printf("r: %u\n", data->r);
-		printf("g: %u\n", data->g);
-		printf("b: %u\n", data->b);
+		printf("r: %lf\n", data->r);
+		printf("g: %lf\n", data->g);
+		printf("b: %lf\n", data->b);
 	}
 	printf("\n\n");
 	for (int i=1; objs != NULL; i++)
@@ -62,9 +62,9 @@ static void	ft_test(t_amb *amb, t_cam *cam, t_lst *lights, t_lst *objs)
 			printf("y: %lf\n", data->y);
 			printf("z: %lf\n", data->z);
 			printf("diameter: %lf\n", data->diameter);
-			printf("r: %u\n", data->r);
-			printf("g: %u\n", data->g);
-			printf("b: %u\n", data->b);
+			printf("r: %lf\n", data->r);
+			printf("g: %lf\n", data->g);
+			printf("b: %lf\n", data->b);
 		}
 		else if (objs->info == F_PL)
 		{
@@ -76,9 +76,9 @@ static void	ft_test(t_amb *amb, t_cam *cam, t_lst *lights, t_lst *objs)
 			printf("x_axis: %lf\n", data->x_axis);
 			printf("y_axis: %lf\n", data->y_axis);
 			printf("z_axis: %lf\n", data->z_axis);
-			printf("r: %u\n", data->r);
-			printf("g: %u\n", data->g);
-			printf("b: %u\n", data->b);
+			printf("r: %lf\n", data->r);
+			printf("g: %lf\n", data->g);
+			printf("b: %lf\n", data->b);
 		}
 		else if (objs->info == F_CY)
 		{
@@ -92,9 +92,9 @@ static void	ft_test(t_amb *amb, t_cam *cam, t_lst *lights, t_lst *objs)
 			printf("z_axis: %lf\n", data->z_axis);
 			printf("diameter: %lf\n", data->diameter);
 			printf("height: %lf\n", data->height);
-			printf("r: %u\n", data->r);
-			printf("g: %u\n", data->g);
-			printf("b: %u\n", data->b);
+			printf("r: %lf\n", data->r);
+			printf("g: %lf\n", data->g);
+			printf("b: %lf\n", data->b);
 		}
 		printf("\n\n");
 		objs = objs->nxt;
