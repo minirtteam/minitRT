@@ -6,12 +6,17 @@
 /*   By: hyunghki <hyunghki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 10:38:10 by hyunghki          #+#    #+#             */
-/*   Updated: 2023/07/18 10:32:39 by hyunghki         ###   ########.fr       */
+/*   Updated: 2023/07/18 10:55:46 by hyunghki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
 
+// 평가지에 값이 null인 경우에도 rendering이 될 수 있게 구현하라고 나와있던게 생각나서
+// data가 아무것도 없을때는 에러처리가 아닌 0을 리턴하게 했습니다.
+// 다만 '-'나 '+'만 있는 경우에는 에러로 처리했습니다.
+
+// double의 값의 경우 무한히 받을 수 있게 구현했습니다.
 static double	get_num(char *s)
 {
 	double	res;
@@ -34,6 +39,8 @@ static double	get_num(char *s)
 	return (res * sign);
 }
 
+// atou함수의 경우 rgb값을 파싱할 때에만 사용됩니다.
+// 그래서 범위를 0~255의 값만 받을 수 있게 했습니다.
 unsigned int	ft_atou(char *s)
 {
 	unsigned int	res;

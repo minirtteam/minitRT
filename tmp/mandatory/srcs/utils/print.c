@@ -6,7 +6,7 @@
 /*   By: hyunghki <hyunghki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 10:39:11 by hyunghki          #+#    #+#             */
-/*   Updated: 2023/07/18 10:32:43 by hyunghki         ###   ########.fr       */
+/*   Updated: 2023/07/18 10:56:39 by hyunghki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,13 @@ void	ft_putstr_fd(char *s, int fd)
 {
 	while (*s)
 	{
-		write(fd, s, 1);
+		if (write(fd, s, 1) < 0)
+		{
+			if (fd != 2)
+				ft_error();
+			else
+				exit(EXIT_FAILURE);
+		}
 		s++;
 	}
 }
