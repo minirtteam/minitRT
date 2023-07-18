@@ -6,14 +6,14 @@
 /*   By: hyunghki <hyunghki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 16:57:35 by hyunghki          #+#    #+#             */
-/*   Updated: 2023/07/18 10:32:08 by hyunghki         ###   ########.fr       */
+/*   Updated: 2023/07/18 11:25:24 by hyunghki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 #include "utils.h"
 
-static void	ft_gnl_set_buffer(char *buf, int st, int en)
+static int	ft_gnl_set_buffer(char *buf, int st, int en)
 {
 	int	i;
 
@@ -21,6 +21,7 @@ static void	ft_gnl_set_buffer(char *buf, int st, int en)
 	while (++i + st < en)
 		buf[i] = buf[i + st];
 	buf[i] = '\0';
+	return (1);
 }
 
 int	ft_gnl_strncat(char **s1, char *s2, int s1_size, int s2_size)
@@ -36,12 +37,11 @@ int	ft_gnl_strncat(char **s1, char *s2, int s1_size, int s2_size)
 		(*s1)[i] = tmp[i];
 	free(tmp);
 	j = -1;
-	while (s2[j] != '\n' && ++j < s2_size)
-		(*s1)[i + j] = s2[j];
-	if (s2[j] == '\n')
+	while (++j < s2_size)
 	{
-		ft_gnl_set_buffer(s2, j + 1, s2_size);
-		return (1);
+		if (s2[j] == '\n')
+			return (ft_gnl_set_buffer(s2, j + 1, s2_size));
+		(*s1)[i + j] = s2[j];
 	}
 	return (0);
 }
