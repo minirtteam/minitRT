@@ -6,7 +6,7 @@
 #    By: hyunghki <hyunghki@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/17 17:57:28 by hyunghki          #+#    #+#              #
-#    Updated: 2023/07/18 11:34:59 by hyunghki         ###   ########.fr        #
+#    Updated: 2023/07/18 14:06:53 by hyunghki         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,7 +53,7 @@ fclean:
 
 $(NAME): $(OBJS)
 	@make -C mlx
-	$(CC) -o $@ $^ $(LDFLAGS) $(DEBUG_FLAGS)
+	$(CC) -o $@ $^ $(LDFLAGS)
 
 %.o: %.c
-	$(CC) $(CFLAGS) -o $@ -c $< $(INCLUDE) $(DEBUG_FLAGS)
+	$(CC) $(CFLAGS) -o $@ -c $< $(INCLUDE)

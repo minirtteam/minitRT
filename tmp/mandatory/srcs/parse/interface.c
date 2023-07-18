@@ -6,7 +6,7 @@
 /*   By: hyunghki <hyunghki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 14:12:25 by hyunghki          #+#    #+#             */
-/*   Updated: 2023/07/18 11:01:12 by hyunghki         ###   ########.fr       */
+/*   Updated: 2023/07/18 17:47:48 by hyunghki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ t_lst	*ft_parse(char *file_name, t_amb **amb, t_cam **cam, t_lst **lights)
 	}
 	ft_lst_free(tmp);
 	// camera의 값이 없을 경우 error
-	if (*cam == NULL)
+	if (*amb == NULL || *cam == NULL)
 		ft_error();
 	return (objs);
 }
