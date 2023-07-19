@@ -6,7 +6,7 @@
 /*   By: hyunghki <hyunghki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 09:59:53 by hyunghki          #+#    #+#             */
-/*   Updated: 2023/07/19 10:27:19 by hyunghki         ###   ########.fr       */
+/*   Updated: 2023/07/19 11:16:02 by hyunghki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,16 @@ static void	ft_put_pixel(t_data *data, int x, int y, unsigned int color)
 
 void	print_image(t_data *data)
 {
-	int	i;
-	int	j;
+	int	y;
+	int	x;
 
 	mlx_clear_window(data->mlx, data->win);
-	i = -1;
-	while (++i < WIDTH)
+	y = -1;
+	while (++y < HEIGHT)
 	{
-		j = -1;
-		while (++j < HEIGHT)
-			ft_put_pixel(data, i, j, 0x50FF00FF);
+		x = -1;
+		while (++x < WIDTH)
+			ft_put_pixel(data, x, y, ft_calculate(data, x, y));
 	}
 	mlx_put_image_to_window(data->mlx, data->win, data->img, 0, 0);
 }

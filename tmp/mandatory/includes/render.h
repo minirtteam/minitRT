@@ -6,7 +6,7 @@
 /*   By: hyunghki <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 09:41:10 by hyunghki          #+#    #+#             */
-/*   Updated: 2023/07/19 09:54:03 by hyunghki         ###   ########.fr       */
+/*   Updated: 2023/07/19 11:15:36 by hyunghki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ typedef struct s_data
 	t_lst		*objs;
 }		t_data;
 
-void	ft_render(t_amb *amb, t_cam *cam, t_lst *lights, t_lst *objs);
-void	print_image(t_data *data);
+void			ft_render(t_amb *amb, t_cam *cam, t_lst *lights, t_lst *objs);
+void			print_image(t_data *data);
+unsigned int	ft_calculate(t_data *data, int x, int y);
 
 #endif
