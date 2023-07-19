@@ -6,7 +6,7 @@
 /*   By: hyunghki <hyunghki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 10:51:54 by hyunghki          #+#    #+#             */
-/*   Updated: 2023/07/18 13:06:00 by hyunghki         ###   ########.fr       */
+/*   Updated: 2023/07/19 09:39:48 by hyunghki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # include <unistd.h>
 # include <stdlib.h>
-# include <stdio.h> // test code
 # include "data_type.h"
 
 void	*ft_calloc(int size);

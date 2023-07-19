@@ -6,7 +6,7 @@
 #    By: hyunghki <hyunghki@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/17 17:57:28 by hyunghki          #+#    #+#              #
-#    Updated: 2023/07/18 14:06:53 by hyunghki         ###   ########.fr        #
+#    Updated: 2023/07/19 09:59:47 by hyunghki         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,6 +32,8 @@ SRCS= $(SRC_DIR)get_next_line/get_next_line.c \
 	  $(SRC_DIR)parse/utils.c \
 	  $(SRC_DIR)parse/mk_struct.c \
 	  $(SRC_DIR)parse/mk_struct2.c \
+	  $(SRC_DIR)render/interface.c \
+	  $(SRC_DIR)render/print_image.c \
 	  $(SRC_DIR)main.c
 OBJS= $(SRCS:.c=.o)
 
