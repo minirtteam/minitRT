@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   str.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyunghki <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: hyunghki <hyunghki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 10:21:49 by hyunghki          #+#    #+#             */
-/*   Updated: 2023/07/17 11:10:05 by hyunghki         ###   ########.fr       */
+/*   Updated: 2023/07/18 10:32:50 by hyunghki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,13 +54,11 @@ char	*ft_trim(char *s)
 {
 	int	i;
 
-	while (*s && (*s == ' ' || *s == '\t'))
+	while (ft_str_find(" \n\t\v\f\r", *s) != -1)
 		s++;
 	i = ft_strlen(s) - 1;
-	while (i >= 0)
+	while (i >= 0 && ft_str_find(" \n\t\v\f\r", s[i]) != -1)
 	{
-		if (s[i] != ' ' && s[i] != '\t')
-			break ;
 		s[i] = '\0';
 		i--;
 	}

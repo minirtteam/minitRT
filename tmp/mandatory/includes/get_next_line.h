@@ -1,28 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print.c                                            :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyunghki <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: hyunghki <hyunghki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/17 10:39:11 by hyunghki          #+#    #+#             */
-/*   Updated: 2023/07/17 10:53:25 by hyunghki         ###   ########.fr       */
+/*   Created: 2023/03/21 16:38:06 by hyunghki          #+#    #+#             */
+/*   Updated: 2023/07/18 11:25:37 by hyunghki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "utils.h"
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
 
-void	ft_putstr_fd(char *s, int fd)
-{
-	while (*s)
-	{
-		write(fd, s, 1);
-		s++;
-	}
-}
+# include <unistd.h>
+# include <stdlib.h>
 
-void	ft_error(void)
-{
-	ft_putstr_fd("Error\n", 2);
-	exit(EXIT_FAILURE);
-}
+# define BUFFER_SIZE 4096
+
+char	*get_next_line(int fd);
+int		ft_gnl_strncat(char **s1, char *s2, int s1_size, int s2_size);
+
+#endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyunghki <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: hyunghki <hyunghki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 16:38:53 by hyunghki          #+#    #+#             */
-/*   Updated: 2023/07/17 10:46:27 by hyunghki         ###   ########.fr       */
+/*   Updated: 2023/07/18 10:32:07 by hyunghki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,10 @@ char	*get_next_line(int fd)
 	int			bytes;
 	char		*target;
 
-	target = ft_gnl_strdup(buf, 0);
-	*buf = '\0';
+	target = NULL;
+	if (*buf != '\0' && \
+	ft_gnl_strncat(&target, buf, 0, ft_strnlen(buf, BUFFER_SIZE)) != 0)
+		return (target);
 	while (1)
 	{
 		bytes = read(fd, buf, BUFFER_SIZE);
@@ -29,12 +31,9 @@ char	*get_next_line(int fd)
 		if (bytes == 0)
 		{
 			*buf = '\0';
-			if (*target != '\0')
-				break ;
-			free(target);
-			return (NULL);
+			break ;
 		}
-		if (ft_gnl_strncat(&target, buf, ft_strlen(target), bytes) == 1)
+		if (ft_gnl_strncat(&target, buf, ft_strlen(target), bytes) != 0)
 			break ;
 	}
 	return (target);

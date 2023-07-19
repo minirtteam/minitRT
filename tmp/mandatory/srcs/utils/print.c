@@ -1,30 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   memmory.c                                          :+:      :+:    :+:   */
+/*   print.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyunghki <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: hyunghki <hyunghki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/17 10:38:28 by hyunghki          #+#    #+#             */
-/*   Updated: 2023/07/17 10:52:29 by hyunghki         ###   ########.fr       */
+/*   Created: 2023/07/17 10:39:11 by hyunghki          #+#    #+#             */
+/*   Updated: 2023/07/19 10:24:01 by hyunghki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
 
-void	*ft_calloc(int size)
+void	ft_putstr_fd(char *s, int fd)
 {
-	int				i;
-	unsigned char	*target;
-
-	target = malloc(size);
-	if (target == NULL)
-		ft_error();
-	i = 0;
-	while (i < size)
+	while (*s)
 	{
-		target[i] = 0;
-		i++;
+		write(fd, s, 1);
+		s++;
 	}
-	return (target);
+}
+
+void	ft_error(void)
+{
+	ft_putstr_fd("Error\n", 2);
+	exit(EXIT_FAILURE);
 }
