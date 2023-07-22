@@ -6,7 +6,7 @@
 /*   By: hyunghki <hyunghki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 09:09:19 by hyunghki          #+#    #+#             */
-/*   Updated: 2023/07/18 10:32:05 by hyunghki         ###   ########.fr       */
+/*   Updated: 2023/07/22 11:53:55 by hyunghki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,13 @@ static t_sphere	*mk_sp(t_lst *target)
 	t_sphere	*ret;
 
 	ret = ft_calloc(sizeof(t_sphere));
-	ft_get_coord(&ret->x, &ret->y, &ret->z, target->data);
+	ft_get_coord(&ret->coord, target->data);
 	target = target->nxt;
 	ret->diameter = ft_atod(target->data);
+	if (ret->diameter < 0)
+		ft_error();
 	target = target->nxt;
-	ft_get_rgb(&ret->r, &ret->g, &ret->b, target->data);
+	ft_get_rgb(&ret->rgb, target->data);
 	return (ret);
 }
 
@@ -31,11 +33,11 @@ static t_plane	*mk_pl(t_lst *target)
 	t_plane	*ret;
 
 	ret = ft_calloc(sizeof(t_plane));
-	ft_get_coord(&ret->x, &ret->y, &ret->z, target->data);
+	ft_get_coord(&ret->coord, target->data);
 	target = target->nxt;
-	ft_get_axis(&ret->x_axis, &ret->y_axis, &ret->z_axis, target->data);
+	ft_get_axis(&ret->axis, target->data);
 	target = target->nxt;
-	ft_get_rgb(&ret->r, &ret->g, &ret->b, target->data);
+	ft_get_rgb(&ret->rgb, target->data);
 	return (ret);
 }
 
@@ -44,15 +46,19 @@ static t_cylinder	*mk_cy(t_lst *target)
 	t_cylinder	*ret;
 
 	ret = ft_calloc(sizeof(t_cylinder));
-	ft_get_coord(&ret->x, &ret->y, &ret->z, target->data);
+	ft_get_coord(&ret->coord, target->data);
 	target = target->nxt;
-	ft_get_axis(&ret->x_axis, &ret->y_axis, &ret->z_axis, target->data);
+	ft_get_axis(&ret->axis, target->data);
 	target = target->nxt;
 	ret->diameter = ft_atod(target->data);
+	if (ret->diameter < 0)
+		ft_error();
 	target = target->nxt;
 	ret->height = ft_atod(target->data);
+	if (ret->height < 0)
+		ft_error();
 	target = target->nxt;
-	ft_get_rgb(&ret->r, &ret->g, &ret->b, target->data);
+	ft_get_rgb(&ret->rgb, target->data);
 	return (ret);
 }
 

@@ -6,7 +6,7 @@
 /*   By: hyunghki <hyunghki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 08:59:05 by hyunghki          #+#    #+#             */
-/*   Updated: 2023/07/18 10:32:05 by hyunghki         ###   ########.fr       */
+/*   Updated: 2023/07/22 09:49:26 by hyunghki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static t_amb	*mk_amb(t_lst *target)
 	if (ret->ratio < 0.0 || ret->ratio > 1.0)
 		ft_error();
 	target = target->nxt;
-	ft_get_rgb(&ret->r, &ret->g, &ret->b, target->data);
+	ft_get_rgb(&ret->rgb, target->data);
 	return (ret);
 }
 
@@ -31,9 +31,9 @@ static t_cam	*mk_cam(t_lst *target)
 	t_cam	*ret;
 
 	ret = ft_calloc(sizeof(t_cam));
-	ft_get_coord(&ret->x, &ret->y, &ret->z, target->data);
+	ft_get_coord(&ret->coord, target->data);
 	target = target->nxt;
-	ft_get_axis(&ret->x_axis, &ret->y_axis, &ret->z_axis, target->data);
+	ft_get_axis(&ret->axis, target->data);
 	target = target->nxt;
 	ret->fov = ft_atod(target->data);
 	if (ret->fov < 0 || ret->fov > 180)
@@ -46,13 +46,13 @@ static t_light	*mk_light(t_lst *target)
 	t_light	*ret;
 
 	ret = ft_calloc(sizeof(t_light));
-	ft_get_coord(&ret->x, &ret->y, &ret->z, target->data);
+	ft_get_coord(&ret->coord, target->data);
 	target = target->nxt;
 	ret->ratio = ft_atod(target->data);
 	if (ret->ratio < 0.0 || ret->ratio > 1.0)
 		ft_error();
 	target = target->nxt;
-	ft_get_rgb(&ret->r, &ret->g, &ret->b, target->data);
+	ft_get_rgb(&ret->rgb, target->data);
 	return (ret);
 }
 
