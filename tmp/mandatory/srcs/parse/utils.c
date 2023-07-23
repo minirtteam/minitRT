@@ -6,10 +6,11 @@
 /*   By: hyunghki <hyunghki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 06:51:55 by hyunghki          #+#    #+#             */
-/*   Updated: 2023/07/22 13:35:59 by hyunghki         ###   ########.fr       */
+/*   Updated: 2023/07/23 15:16:59 by hyunghki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "vector.h"
 #include "parse.h"
 #include "utils.h"
 #include "get_next_line.h"
@@ -119,7 +120,5 @@ void	ft_get_rgb(t_color *rgb, char *s)
 	rgb->z = ft_atod(s);
 	if (rgb->z < 0 || rgb->z > 255)
 		ft_error();
-	rgb->x /= 255.999;
-	rgb->y /= 255.999;
-	rgb->z /= 255.999;
+	*rgb = vec_multi(*rgb, (1.0 / 255));
 }

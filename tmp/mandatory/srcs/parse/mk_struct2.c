@@ -6,7 +6,7 @@
 /*   By: hyunghki <hyunghki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 09:09:19 by hyunghki          #+#    #+#             */
-/*   Updated: 2023/07/22 11:53:55 by hyunghki         ###   ########.fr       */
+/*   Updated: 2023/07/23 16:14:16 by hyunghki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,10 @@ static t_sphere	*mk_sp(t_lst *target)
 	ret = ft_calloc(sizeof(t_sphere));
 	ft_get_coord(&ret->coord, target->data);
 	target = target->nxt;
-	ret->diameter = ft_atod(target->data);
-	if (ret->diameter < 0)
+	ret->radius = ft_atod(target->data);
+	if (ret->radius < 0)
 		ft_error();
+	ret->radius /= 2;
 	target = target->nxt;
 	ft_get_rgb(&ret->rgb, target->data);
 	return (ret);

@@ -6,7 +6,7 @@
 /*   By: hyunghki <hyunghki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 09:59:53 by hyunghki          #+#    #+#             */
-/*   Updated: 2023/07/22 17:20:25 by hyunghki         ###   ########.fr       */
+/*   Updated: 2023/07/23 15:46:58 by hyunghki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ static unsigned int	get_color(t_color rgb)
 	int	g;
 	int	b;
 
-	r = rgb.x * 255.999;
-	g = rgb.y * 255.999;
-	b = rgb.z * 255.999;
+	r = rgb.x * 255;
+	g = rgb.y * 255;
+	b = rgb.z * 255;
 	return ((r << 16) + (g << 8) + b);
 }
 

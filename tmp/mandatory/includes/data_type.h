@@ -3,22 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   data_type.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyunghki <marvin@42.fr>                    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/22 10:02:04 by hyunghki          #+#    #+#             */
-/*   Updated: 2023/07/22 16:42:59 by hyunghki         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   data_type.h                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
 /*   By: hyunghki <hyunghki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 07:35:44 by hyunghki          #+#    #+#             */
-/*   Updated: 2023/07/22 09:59:41 by hyunghki         ###   ########.fr       */
+/*   Updated: 2023/07/23 16:13:48 by hyunghki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +43,6 @@ typedef t_vec3	t_color;
 typedef struct s_viewport
 {
 	double	aspect_ratio;
-	double	focal_length;
 	double	viewport_height;
 	double	viewport_width;
 	t_vec3	origin;
@@ -70,14 +57,10 @@ typedef struct s_ray
 	t_vec3	r;
 }	t_ray;
 
-typedef struct s_range
+typedef struct s_rec
 {
 	double	min;
 	double	max;
-}	t_range;
-
-typedef struct s_rec
-{
 	double	t;
 	t_vec3	p;
 	t_vec3	normal;
@@ -107,7 +90,7 @@ typedef struct s_light
 typedef struct s_sphere
 {
 	t_vec3	coord;
-	double	diameter;
+	double	radius;
 	t_color	rgb;
 }	t_sphere;
 

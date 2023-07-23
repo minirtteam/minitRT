@@ -6,7 +6,7 @@
 #    By: hyunghki <hyunghki@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/17 17:57:28 by hyunghki          #+#    #+#              #
-#    Updated: 2023/07/22 17:23:26 by hyunghki         ###   ########.fr        #
+#    Updated: 2023/07/23 14:47:28 by hyunghki         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,6 +37,8 @@ SRCS= $(SRC_DIR)get_next_line/get_next_line.c \
 	  $(SRC_DIR)render/calculate.c \
 	  $(SRC_DIR)render/hit_chk.c \
 	  $(SRC_DIR)vector/utils.c \
+	  $(SRC_DIR)vector/utils2.c \
+	  $(SRC_DIR)vector/utils3.c \
 	  $(SRC_DIR)main.c
 OBJS= $(SRCS:.c=.o)
 

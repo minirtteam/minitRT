@@ -6,12 +6,13 @@
 /*   By: hyunghki <hyunghki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 08:59:05 by hyunghki          #+#    #+#             */
-/*   Updated: 2023/07/22 09:49:26 by hyunghki         ###   ########.fr       */
+/*   Updated: 2023/07/23 15:15:35 by hyunghki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
 #include "utils.h"
+#include "vector.h"
 
 static t_amb	*mk_amb(t_lst *target)
 {
@@ -36,7 +37,7 @@ static t_cam	*mk_cam(t_lst *target)
 	ft_get_axis(&ret->axis, target->data);
 	target = target->nxt;
 	ret->fov = ft_atod(target->data);
-	if (ret->fov < 0 || ret->fov > 180)
+	if (ret->fov <= 0 || ret->fov >= 180)
 		ft_error();
 	return (ret);
 }
@@ -53,6 +54,7 @@ static t_light	*mk_light(t_lst *target)
 		ft_error();
 	target = target->nxt;
 	ft_get_rgb(&ret->rgb, target->data);
+	ret->rgb = vec_max(ret->rgb, initial_vec(1, 1, 1));
 	return (ret);
 }
 
