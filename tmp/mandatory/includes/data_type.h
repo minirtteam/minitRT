@@ -6,7 +6,7 @@
 /*   By: hyunghki <hyunghki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 07:35:44 by hyunghki          #+#    #+#             */
-/*   Updated: 2023/07/18 13:05:04 by hyunghki         ###   ########.fr       */
+/*   Updated: 2023/07/24 11:01:05 by hyunghki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,73 +31,71 @@ typedef struct s_lst
 	struct s_lst	*prev;
 }	t_lst;
 
-typedef struct s_amb
-{
-	double	ratio;
-	double	r;
-	double	g;
-	double	b;
-}	t_amb;
-
-typedef struct s_cam
+typedef struct s_vec3
 {
 	double	x;
 	double	y;
 	double	z;
-	double	x_axis;
-	double	y_axis;
-	double	z_axis;
+}	t_vec3;
+
+typedef t_vec3	t_color;
+
+typedef struct s_amb
+{
+	t_color	min_rgb;
+	t_color	rgb;
+}	t_amb;
+
+typedef struct s_cam
+{
+	t_vec3	coord;
+	t_vec3	axis;
 	double	fov;
 }	t_cam;
 
 typedef struct s_light
 {
-	double	x;
-	double	y;
-	double	z;
+	t_vec3	coord;
 	double	ratio;
-	double	r;
-	double	g;
-	double	b;
+	t_color	rgb;
 }	t_light;
 
 typedef struct s_sphere
 {
-	double	x;
-	double	y;
-	double	z;
-	double	diameter;
-	double	r;
-	double	g;
-	double	b;
+	t_vec3	coord;
+	double	radius;
+	t_color	rgb;
 }	t_sphere;
 
 typedef struct s_plane
 {
-	double	x;
-	double	y;
-	double	z;
-	double	x_axis;
-	double	y_axis;
-	double	z_axis;
-	double	r;
-	double	g;
-	double	b;
+	t_vec3	coord;
+	t_vec3	axis;
+	t_color	rgb;
 }	t_plane;
 
 typedef struct s_cylinder
 {
-	double	x;
-	double	y;
-	double	z;
-	double	x_axis;
-	double	y_axis;
-	double	z_axis;
+	t_vec3	coord;
+	t_vec3	axis;
 	double	diameter;
 	double	height;
-	double	r;
-	double	g;
-	double	b;
+	t_color	rgb;
 }	t_cylinder;
+
+typedef struct s_info
+{
+	double	aspect_ratio;
+	double	view_height;
+	double	view_width;
+	t_amb	*amb;
+	t_cam	*cam;
+	t_lst	*lights;
+	t_lst	*objs;
+	t_vec3	origin;
+	t_vec3	horizontal;
+	t_vec3	vertical;
+	t_vec3	low_left;
+}	t_info;
 
 #endif

@@ -6,20 +6,18 @@
 /*   By: hyunghki <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 09:41:10 by hyunghki          #+#    #+#             */
-/*   Updated: 2023/07/19 11:15:36 by hyunghki         ###   ########.fr       */
+/*   Updated: 2023/07/24 09:41:18 by hyunghki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef RENDER_H
 # define RENDER_H
 
-# include "utils.h"
 # include "mlx.h"
 # include "data_type.h"
-# include "math.h"
 
-# define WIDTH 1000
-# define HEIGHT 1000
+# define WIDTH 1280
+# define HEIGHT 720
 
 typedef struct s_data
 {
@@ -30,14 +28,9 @@ typedef struct s_data
 	int			bpp;
 	int			line_length;
 	int			endian;
-	t_amb		*amb;
-	t_cam		*cam;
-	t_lst		*lights;
-	t_lst		*objs;
 }		t_data;
 
-void			ft_render(t_amb *amb, t_cam *cam, t_lst *lights, t_lst *objs);
-void			print_image(t_data *data);
-unsigned int	ft_calculate(t_data *data, int x, int y);
+void	ft_render(t_amb *amb, t_cam *cam, t_lst *lights, t_lst *objs);
+void	print_image(t_data *data, t_info *info);
 
 #endif

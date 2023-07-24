@@ -6,10 +6,11 @@
 /*   By: hyunghki <hyunghki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 06:51:55 by hyunghki          #+#    #+#             */
-/*   Updated: 2023/07/18 13:07:37 by hyunghki         ###   ########.fr       */
+/*   Updated: 2023/07/24 11:11:04 by hyunghki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "vector.h"
 #include "parse.h"
 #include "utils.h"
 #include "get_next_line.h"
@@ -52,7 +53,7 @@ t_lst	*get_data(char *file_name)
 	return (ret);
 }
 
-void	ft_get_coord(double *x, double *y, double *z, char *s)
+void	ft_get_coord(t_vec3 *coord, char *s)
 {
 	int	i;
 
@@ -60,18 +61,18 @@ void	ft_get_coord(double *x, double *y, double *z, char *s)
 	if (i == -1)
 		ft_error();
 	s[i] = '\0';
-	(*x) = ft_atod(s);
+	coord->x = ft_atod(s);
 	s += (i + 1);
 	i = ft_str_find(s, ',');
 	if (i == -1)
 		ft_error();
 	s[i] = '\0';
-	(*y) = ft_atod(s);
+	coord->y = ft_atod(s);
 	s += (i + 1);
-	(*z) = ft_atod(s);
+	coord->z = ft_atod(s);
 }
 
-void	ft_get_axis(double *x, double *y, double *z, char *s)
+void	ft_get_axis(t_vec3 *axis, char *s)
 {
 	int	i;
 
@@ -79,24 +80,24 @@ void	ft_get_axis(double *x, double *y, double *z, char *s)
 	if (i == -1)
 		ft_error();
 	s[i] = '\0';
-	(*x) = ft_atod(s);
-	if (*x < -1 || *x > 1)
+	axis->x = ft_atod(s);
+	if (axis->x < -1 || axis->x > 1)
 		ft_error();
 	s += (i + 1);
 	i = ft_str_find(s, ',');
 	if (i == -1)
 		ft_error();
 	s[i] = '\0';
-	(*y) = ft_atod(s);
-	if (*y < -1 || *y > 1)
+	axis->y = ft_atod(s);
+	if (axis->y < -1 || axis->y > 1)
 		ft_error();
 	s += (i + 1);
-	(*z) = ft_atod(s);
-	if (*z < -1 || *z > 1)
+	axis->z = ft_atod(s);
+	if (axis->z < -1 || axis->z > 1)
 		ft_error();
 }
 
-void	ft_get_rgb(double *r, double *g, double *b, char *s)
+void	ft_get_rgb(t_color *rgb, char *s)
 {
 	int	i;
 
@@ -104,19 +105,20 @@ void	ft_get_rgb(double *r, double *g, double *b, char *s)
 	if (i == -1)
 		ft_error();
 	s[i] = '\0';
-	(*r) = ft_atod(s);
-	if (*r < 0 || *r > 255)
+	rgb->x = ft_atod(s);
+	if (rgb->x < 0 || rgb->x > 255)
 		ft_error();
 	s += (i + 1);
 	i = ft_str_find(s, ',');
 	if (i == -1)
 		ft_error();
 	s[i] = '\0';
-	(*g) = ft_atod(s);
-	if (*g < 0 || *g > 255)
+	rgb->y = ft_atod(s);
+	if (rgb->y < 0 || rgb->y > 255)
 		ft_error();
 	s += (i + 1);
-	(*b) = ft_atod(s);
-	if (*b < 0 || *b > 255)
+	rgb->z = ft_atod(s);
+	if (rgb->z < 0 || rgb->z > 255)
 		ft_error();
+	*rgb = vec_devide(*rgb, 255);
 }
