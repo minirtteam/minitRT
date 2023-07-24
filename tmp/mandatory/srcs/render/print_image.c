@@ -6,12 +6,12 @@
 /*   By: hyunghki <hyunghki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 09:59:53 by hyunghki          #+#    #+#             */
-/*   Updated: 2023/07/23 15:46:58 by hyunghki         ###   ########.fr       */
+/*   Updated: 2023/07/24 09:40:56 by hyunghki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "render.h"
-#include "vector.h"
+#include "calculate.h"
 
 static unsigned int	get_color(t_color rgb)
 {
@@ -33,15 +33,13 @@ static void	ft_put_pixel(t_data *data, int x, int y, unsigned int color)
 	*(unsigned int *)dst = color;
 }
 
-void	print_image(t_data *data)
+void	print_image(t_data *data, t_info *info)
 {
-	t_viewport	vp;
 	int			y;
 	int			x;
-	double		u;
-	double		v;
+	double		s;
+	double		t;
 
-	ft_initial_vp(&vp, data);
 	mlx_clear_window(data->mlx, data->win);
 	y = -1;
 	while (++y < HEIGHT)
@@ -49,9 +47,9 @@ void	print_image(t_data *data)
 		x = -1;
 		while (++x < WIDTH)
 		{
-			u = (double)x / (WIDTH - 1);
-			v = (double)(HEIGHT - y) / (HEIGHT - 1);
-			ft_put_pixel(data, x, y, get_color(ft_calculate(&vp, data, u, v)));
+			s = (double)x / (WIDTH - 1);
+			t = (double)(HEIGHT - y) / (HEIGHT - 1);
+			ft_put_pixel(data, x, y, get_color(ft_calculate(info, s, t)));
 		}
 	}
 	mlx_put_image_to_window(data->mlx, data->win, data->img, 0, 0);

@@ -6,45 +6,37 @@
 /*   By: hyunghki <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 17:15:46 by hyunghki          #+#    #+#             */
-/*   Updated: 2023/07/23 16:12:51 by hyunghki         ###   ########.fr       */
+/*   Updated: 2023/07/24 10:17:25 by hyunghki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "render.h"
+#include "calculate.h"
 #include "vector.h"
 
-static int	hit_chk_sp(t_ray ray, t_sphere *sp, t_rec *rec)
+static int	hit_chk_sp(t_ray *ray, t_sphere *sp, t_rec *rec)
 {
 	double	a;
 	double	half_b;
 	double	c;
-	double	discriminant;
+	double	cmp;
 	t_vec3	oc;
 
-	oc = vec_plus(ray.origin, vec_multi(sp->coord, -1));
-    a = vec_dist(ray.r, ray.r);
-    half_b = vec_dist(oc, ray.r);
-    c = vec_dist(oc, oc) - sp->radius * sp->radius;
-    discriminant = half_b * half_b - a * c;
-    if (discriminant < 0)
+	oc = vec_minus(ray->origin, sp->coord);
+    a = vec_length_squared(ray->dir);
+    half_b = vec_dot(oc, ray->dir);
+    c = vec_length_squared(oc) - sp->radius * sp->radius;
+    cmp = half_b * half_b - a * c;
+    if (cmp < 0)
 		return (0);
-    double sqrtd = sqrt(discriminant);
-    double root = (-half_b - sqrtd) / a;
-    if (root < rec->min || rec->max < root)
-	{
-        root = (-half_b + sqrtd) / a;
-        if (root < rec->min || rec->max < root)
-            return (0);
-    }
-    rec->t = root;
-    rec->p = vec_plus(ray.origin, vec_multi(ray.r, rec->t));
-    rec->normal = \
-		vec_multi(vec_plus(rec->p, vec_multi(sp->coord, -1)), 1 / sp->radius);
+	if (hit_chk_help(rec, sqrt(cmp), a, half_b))
+		return (0);
+    rec->p = vec_plus(ray->origin, vec_multi(ray->dir, rec->t));
+    chk_face(ray, rec, vec_devide(vec_minus(rec->p, sp->coord), sp->radius));
 	rec->color = sp->rgb;
     return (1);
 }
 
-static int	hit_chk_pl(t_ray ray, t_plane *pl, t_rec *rec)
+static int	hit_chk_pl(t_ray *ray, t_plane *pl, t_rec *rec)
 {
 	(void)ray;
 	(void)pl;
@@ -52,7 +44,7 @@ static int	hit_chk_pl(t_ray ray, t_plane *pl, t_rec *rec)
 	return (0);
 }
 
-static int	hit_chk_cy(t_ray ray, t_cylinder *cy, t_rec *rec)
+static int	hit_chk_cy(t_ray *ray, t_cylinder *cy, t_rec *rec)
 {
 	(void)ray;
 	(void)cy;
@@ -60,12 +52,12 @@ static int	hit_chk_cy(t_ray ray, t_cylinder *cy, t_rec *rec)
 	return (0);
 }
 
-int	is_hit(t_ray ray, t_lst *objs, t_rec *rec)
+int	is_hit(t_ray *ray, t_lst *objs, t_rec *rec)
 {
 	int		is_hit;
 
 	is_hit = 0;
-	while (objs != NULL)
+	while (objs)
 	{
 		if ((objs->info == F_SP && hit_chk_sp(ray, objs->data, rec)) \
 			|| (objs->info == F_PL && hit_chk_pl(ray, objs->data, rec)) \

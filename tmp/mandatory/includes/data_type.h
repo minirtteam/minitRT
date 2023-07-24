@@ -6,7 +6,7 @@
 /*   By: hyunghki <hyunghki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 07:35:44 by hyunghki          #+#    #+#             */
-/*   Updated: 2023/07/23 16:13:48 by hyunghki         ###   ########.fr       */
+/*   Updated: 2023/07/24 11:01:05 by hyunghki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,36 +40,9 @@ typedef struct s_vec3
 
 typedef t_vec3	t_color;
 
-typedef struct s_viewport
-{
-	double	aspect_ratio;
-	double	viewport_height;
-	double	viewport_width;
-	t_vec3	origin;
-	t_vec3	horizontal;
-	t_vec3	vertical;
-	t_vec3	lower_left_corner;
-}	t_viewport;
-
-typedef struct s_ray
-{
-	t_vec3	origin;
-	t_vec3	r;
-}	t_ray;
-
-typedef struct s_rec
-{
-	double	min;
-	double	max;
-	double	t;
-	t_vec3	p;
-	t_vec3	normal;
-	t_vec3	color;
-}	t_rec;
-
 typedef struct s_amb
 {
-	double	ratio;
+	t_color	min_rgb;
 	t_color	rgb;
 }	t_amb;
 
@@ -109,5 +82,20 @@ typedef struct s_cylinder
 	double	height;
 	t_color	rgb;
 }	t_cylinder;
+
+typedef struct s_info
+{
+	double	aspect_ratio;
+	double	view_height;
+	double	view_width;
+	t_amb	*amb;
+	t_cam	*cam;
+	t_lst	*lights;
+	t_lst	*objs;
+	t_vec3	origin;
+	t_vec3	horizontal;
+	t_vec3	vertical;
+	t_vec3	low_left;
+}	t_info;
 
 #endif

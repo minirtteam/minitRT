@@ -6,7 +6,7 @@
 /*   By: hyunghki <hyunghki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 08:59:05 by hyunghki          #+#    #+#             */
-/*   Updated: 2023/07/23 15:15:35 by hyunghki         ###   ########.fr       */
+/*   Updated: 2023/07/24 11:09:26 by hyunghki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,16 @@
 
 static t_amb	*mk_amb(t_lst *target)
 {
+	double	ratio;
 	t_amb	*ret;
 
 	ret = ft_calloc(sizeof(t_amb));
-	ret->ratio = ft_atod(target->data);
-	if (ret->ratio < 0.0 || ret->ratio > 1.0)
+	ratio = ft_atod(target->data);
+	if (ratio < 0.0 || ratio > 1.0)
 		ft_error();
 	target = target->nxt;
 	ft_get_rgb(&ret->rgb, target->data);
+	ret->min_rgb = vec_multi(ret->rgb, ratio);
 	return (ret);
 }
 
