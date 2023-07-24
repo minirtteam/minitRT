@@ -6,7 +6,7 @@
 /*   By: hyunghki <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 09:41:10 by hyunghki          #+#    #+#             */
-/*   Updated: 2023/07/24 15:14:07 by hyunghki         ###   ########.fr       */
+/*   Updated: 2023/07/24 15:59:08 by hyunghki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,19 @@
 
 # define WIDTH 1280
 # define HEIGHT 720
+# define K_UP 126
+# define K_DOWN 125
+# define K_LEFT 123
+# define K_RIGHT 124
+# define K_W 13
+# define K_A 0
+# define K_S 1
+# define K_D 2
+# define K_ESC 53
+# define M_LEFT 1
+# define M_RIGHT 2
+# define M_UP 4
+# define M_DOWN 5
 
 typedef struct s_data
 {
