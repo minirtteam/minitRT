@@ -6,7 +6,7 @@
 /*   By: hyunghki <hyunghki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 08:59:05 by hyunghki          #+#    #+#             */
-/*   Updated: 2023/07/24 11:09:26 by hyunghki         ###   ########.fr       */
+/*   Updated: 2023/07/24 15:51:28 by hyunghki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ static t_cam	*mk_cam(t_lst *target)
 	ft_get_coord(&ret->coord, target->data);
 	target = target->nxt;
 	ft_get_axis(&ret->axis, target->data);
+	if (ret->axis.y == -1)
+		ft_error();
 	target = target->nxt;
 	ret->fov = ft_atod(target->data);
 	if (ret->fov <= 0 || ret->fov >= 180)

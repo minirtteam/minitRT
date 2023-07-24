@@ -6,7 +6,7 @@
 /*   By: hyunghki <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 09:41:10 by hyunghki          #+#    #+#             */
-/*   Updated: 2023/07/24 09:41:18 by hyunghki         ###   ########.fr       */
+/*   Updated: 2023/07/24 15:14:07 by hyunghki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,10 @@ typedef struct s_data
 	int			bpp;
 	int			line_length;
 	int			endian;
+	t_info		*info;
 }		t_data;
 
 void	ft_render(t_amb *amb, t_cam *cam, t_lst *lights, t_lst *objs);
-void	print_image(t_data *data, t_info *info);
+void	print_image(t_data *data);
 
 #endif
