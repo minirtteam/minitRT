@@ -28,31 +28,31 @@ static int	ft_close(int keycode)
 	return (0);
 }
 
-static void	ft_initial_info(t_info *info, t_cam *cam)
+static void	ft_initial_world(t_world *world, t_cam *cam)
 {
-	t_vec3	w;
-	t_vec3	u;
-	t_vec3	v;
+	double	focal_len;
+	double	dir;
 
-	info->cam = cam;
-	info->aspect_ratio = (double)HEIGHT / (double)WIDTH;
-	info->view_width = 2.0 * tan(cam->fov * M_PI / 360.0);
-	info->view_height = info->aspect_ratio * info->view_width;
-	w = vec_unit(vec_minus(cam->coord, cam->axis));
-	u = vec_unit(vec_cross(initial_vec(0, 1, 0), w));
-	v = vec_cross(w, u);
-	info->origin = cam->coord;
-	info->horizontal = vec_multi(u, info->view_width);
-	info->vertical = vec_multi(v, info->view_height);
-	info->low_left = vec_minus(info->origin, vec_devide(info->horizontal, 2));
-	info->low_left = vec_minus(info->low_left, vec_devide(info->vertical, 2));
-	info->low_left = vec_minus(info->low_left, w);
+	world->origin = cam->coord;
+	dir = cam->axis;
+	if (vec_len(vec_cross(initial_vec(0, 1, 0), dir)) != 0)
+		world->u = vec_unit(vec_cross(initial_vec(0, 1, 0), dir));
+	else
+		world->u = vec_unit(vec_cross(initial_vec(0, 0, -1), dir));
+	world->v = vec_cross(dir, world->u);
+	focal_len = (double)WIDTH / (2.0 * tan(cam->fov * M_PI / 360.0));
+	world->origin = cam->coord;
+	world->low_left = vec_minus( \
+			vec_plus(world->origin, vec_multi(world->w, focal_len)), \
+			vec_plus( \
+			vec_multi(world->u, -(double)WIDTH / 2), \
+			vec_multi(world->v, -(double)HEIGHT / 2)));
 }
 
 void	ft_render(t_amb *amb, t_cam *cam, t_lst *lights, t_lst *objs)
 {
 	t_data	data;
-	t_info	info;
+	t_world	world;
 
 	data.mlx = mlx_init();
 	if (data.mlx == NULL)
@@ -65,11 +65,11 @@ void	ft_render(t_amb *amb, t_cam *cam, t_lst *lights, t_lst *objs)
 		ft_error();
 	data.addr = mlx_get_data_addr(data.img, &data.bpp, \
 			&data.line_length, &data.endian);
-	ft_initial_info(&info, cam);
-	info.amb = amb;
-	info.lights = lights;
-	info.objs = objs;
-	print_image(&data, &info);
+	ft_initial_world(&world, cam);
+	world.amb = amb;
+	wolrd.lights = lights;
+	wolrd.objs = objs;
+	print_image(&data, &world);
 	mlx_key_hook(data.win, ft_esc_close, NULL);
 	mlx_hook(data.win, 17, 1L, ft_close, NULL);
 	mlx_loop(data.mlx);

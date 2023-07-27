@@ -33,12 +33,24 @@ static void	ft_put_pixel(t_data *data, int x, int y, unsigned int color)
 	*(unsigned int *)dst = color;
 }
 
-void	print_image(t_data *data, t_info *info)
+static void	get_ray(t_world *world, t_ray *ray, int s, int t)
+{
+	ray->origin = world->origin;
+	ray->dir = vec_unit(\
+				vec_minus(\
+					vec_plus(\
+						vec_plus(\
+							vec_multi(world->u, s), \
+							vec_multi(world->v, t)), \
+							world->low_left),
+					world->origin));
+}
+
+void	print_image(t_data *data, t_world *world)
 {
 	int			y;
 	int			x;
-	double		s;
-	double		t;
+	t_ray		ray;
 
 	mlx_clear_window(data->mlx, data->win);
 	y = -1;
@@ -47,9 +59,8 @@ void	print_image(t_data *data, t_info *info)
 		x = -1;
 		while (++x < WIDTH)
 		{
-			s = (double)x / (WIDTH - 1);
-			t = (double)(HEIGHT - y) / (HEIGHT - 1);
-			ft_put_pixel(data, x, y, get_color(ft_calculate(info, s, t)));
+			get_ray(world, &ray, x, HEIGHT - 1 - y)
+			ft_put_pixel(data, x, y, get_color(ft_calculate(world, &ray)));
 		}
 	}
 	mlx_put_image_to_window(data->mlx, data->win, data->img, 0, 0);
