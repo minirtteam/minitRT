@@ -16,9 +16,8 @@
 
 static void	ft_initial_info(t_info *info, t_cam *cam)
 {
-	t_vec3	w;
-	t_vec3	u;
-	t_vec3	v;
+	double	focal_len;
+	double	dir;
 
 	info->cam = cam;
 	info->aspect_ratio = (double)HEIGHT / (double)WIDTH;
@@ -97,7 +96,7 @@ static int	ft_close(int keycode)
 void	ft_render(t_amb *amb, t_cam *cam, t_lst *lights, t_lst *objs)
 {
 	t_data	data;
-	t_info	info;
+	t_world	world;
 
 	data.mlx = mlx_init();
 	if (data.mlx == NULL)

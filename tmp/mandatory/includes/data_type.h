@@ -42,7 +42,6 @@ typedef t_vec3	t_color;
 
 typedef struct s_amb
 {
-	t_color	min_rgb;
 	t_color	rgb;
 }	t_amb;
 
@@ -83,19 +82,15 @@ typedef struct s_cylinder
 	t_color	rgb;
 }	t_cylinder;
 
-typedef struct s_info
+typedef struct s_world
 {
-	double	aspect_ratio;
-	double	view_height;
-	double	view_width;
+	t_vec3	origin;
+	t_vec3	u;
+	t_vec3	v;
+	t_vec3	low_left;
 	t_amb	*amb;
-	t_cam	*cam;
 	t_lst	*lights;
 	t_lst	*objs;
-	t_vec3	origin;
-	t_vec3	horizontal;
-	t_vec3	vertical;
-	t_vec3	low_left;
-}	t_info;
+}	t_world;
 
 #endif

@@ -81,20 +81,14 @@ void	ft_get_axis(t_vec3 *axis, char *s)
 		ft_error();
 	s[i] = '\0';
 	axis->x = ft_atod(s);
-	if (axis->x < -1 || axis->x > 1)
-		ft_error();
 	s += (i + 1);
 	i = ft_str_find(s, ',');
 	if (i == -1)
 		ft_error();
 	s[i] = '\0';
 	axis->y = ft_atod(s);
-	if (axis->y < -1 || axis->y > 1)
-		ft_error();
 	s += (i + 1);
 	axis->z = ft_atod(s);
-	if (axis->z < -1 || axis->z > 1)
-		ft_error();
 }
 
 void	ft_get_rgb(t_color *rgb, char *s)

@@ -37,8 +37,7 @@ void	print_image(t_data *data)
 {
 	int			y;
 	int			x;
-	double		s;
-	double		t;
+	t_ray		ray;
 
 	mlx_clear_window(data->mlx, data->win);
 	y = -1;

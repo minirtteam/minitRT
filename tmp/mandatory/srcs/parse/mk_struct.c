@@ -16,8 +16,8 @@
 
 static t_amb	*mk_amb(t_lst *target)
 {
-	double	ratio;
 	t_amb	*ret;
+	double	ratio;
 
 	ret = ft_calloc(sizeof(t_amb));
 	ratio = ft_atod(target->data);
@@ -36,7 +36,10 @@ static t_cam	*mk_cam(t_lst *target)
 	ret = ft_calloc(sizeof(t_cam));
 	ft_get_coord(&ret->coord, target->data);
 	target = target->nxt;
-	ft_get_axis(&ret->axis, target->data);
+	ft_get_axis(&ret->w, target->data);
+	if (ret->axis.x < -1 || ret->axis.x > 1 \
+		|| ret->axis.y < -1 || ret->axis.y > 1 \
+		|| ret->axis.z < -1 || ret->axis.z > 1)
 	target = target->nxt;
 	ret->fov = ft_atod(target->data);
 	if (ret->fov <= 0 || ret->fov >= 180)

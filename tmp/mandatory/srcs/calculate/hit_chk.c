@@ -56,10 +56,6 @@ static int	hit_chk_pl(t_ray *ray, t_plane *pl, t_rec *rec)
 
 static int	hit_chk_cy(t_ray *ray, t_cylinder *cy, t_rec *rec)
 {
-	(void)ray;
-	(void)cy;
-	(void)rec;
-	return (0);
 }
 
 int	is_hit(t_ray *ray, t_lst *objs, t_rec *rec)
