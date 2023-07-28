@@ -6,7 +6,7 @@
 /*   By: hyunghki <hyunghki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 09:59:53 by hyunghki          #+#    #+#             */
-/*   Updated: 2023/07/24 16:13:36 by hyunghki         ###   ########.fr       */
+/*   Updated: 2023/07/28 11:15:12 by hyunghki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ void	print_image(t_data *data)
 		x = -1;
 		while (++x < WIDTH)
 		{
-			s = (double)x / (WIDTH - 1);
-			t = (double)(HEIGHT - y) / (HEIGHT - 1);
+			s = (double)(WIDTH - x) / (WIDTH - 1);
+			t = (double)(HEIGHT - 1 - y) / (HEIGHT - 1);
 			ft_put_pixel(data, x, y, get_color(ft_calculate(data->info, s, t)));
 		}
 	}

@@ -6,7 +6,7 @@
 /*   By: hyunghki <hyunghki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 09:40:07 by hyunghki          #+#    #+#             */
-/*   Updated: 2023/07/24 16:55:07 by hyunghki         ###   ########.fr       */
+/*   Updated: 2023/07/28 11:09:40 by hyunghki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,11 @@ static void	ft_initial_info(t_info *info, t_cam *cam)
 	info->aspect_ratio = (double)HEIGHT / (double)WIDTH;
 	info->view_width = 2.0 * tan(cam->fov * M_PI / 360.0);
 	info->view_height = info->aspect_ratio * info->view_width;
-	w = vec_multi(cam->axis, -1);
-	u = vec_unit(vec_cross(initial_vec(0, 1, 0), w));
+	w = cam->axis;
+	if (vec_length(vec_cross(initial_vec(0, 1, 0), w)) != 0)
+		u = vec_unit(vec_cross(initial_vec(0, 1, 0), w));
+	else
+		u = vec_unit(vec_cross(initial_vec(0, 0, -1), w));
 	v = vec_cross(w, u);
 	info->origin = cam->coord;
 	info->horizontal = vec_multi(u, info->view_width);
@@ -62,21 +65,21 @@ static int	handle_key(int keycode, t_data *data)
 	if (keycode == K_ESC)
 		exit(EXIT_SUCCESS);
 	else if (keycode == K_A)
-		data->info->cam->coord.x -= 3.0;
-	else if (keycode == K_W)
-		data->info->cam->coord.z -= 3.0;
-	else if (keycode == K_D)
 		data->info->cam->coord.x += 3.0;
-	else if	(keycode == K_S)
+	else if (keycode == K_W)
 		data->info->cam->coord.z += 3.0;
-	else if (keycode == K_LEFT && data->info->cam->axis.x - 0.3 >= -1.0)
-		data->info->cam->axis.x -= 0.3;
-	else if (keycode == K_UP && data->info->cam->axis.z - 0.3 > -1.0)
-		data->info->cam->axis.z -= 0.3;
-	else if (keycode == K_RIGHT && data->info->cam->axis.x + 0.3 <= 1.0)
-		data->info->cam->axis.x += 0.3;
-	else if	(keycode == K_DOWN && data->info->cam->axis.z + 0.3 <= 1.0)
-		data->info->cam->axis.z += 0.3;
+	else if (keycode == K_D)
+		data->info->cam->coord.x -= 3.0;
+	else if	(keycode == K_S)
+		data->info->cam->coord.z -= 3.0;
+	else if (keycode == K_LEFT && data->info->cam->axis.x - 0.1 >= -1.0)
+		data->info->cam->axis.x -= 0.1;
+	else if (keycode == K_UP && data->info->cam->axis.z + 0.1 <= 1.0)
+		data->info->cam->axis.z += 0.1;
+	else if (keycode == K_RIGHT && data->info->cam->axis.x + 0.1 <= 1.0)
+		data->info->cam->axis.x += 0.1;
+	else if	(keycode == K_DOWN && data->info->cam->axis.z - 0.1 >= -1.0)
+		data->info->cam->axis.z -= 0.1;
 	else
 		return (0);
 	ft_initial_info(data->info, data->info->cam);

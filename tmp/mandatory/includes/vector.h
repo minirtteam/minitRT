@@ -6,7 +6,7 @@
 /*   By: hyunghki <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 09:32:29 by hyunghki          #+#    #+#             */
-/*   Updated: 2023/07/24 09:36:57 by hyunghki         ###   ########.fr       */
+/*   Updated: 2023/07/28 14:05:27 by hyunghki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,6 @@ t_vec3	vec_multi_vec(t_vec3 v1, t_vec3 v2);
 t_vec3	vec_min(t_vec3 v1, t_vec3 v2);
 t_vec3	vec_max(t_vec3 v1, t_vec3 v2);
 t_vec3	vec_unit(t_vec3 v);
+t_vec3	ray_at(t_ray *ray, double t);
 
 #endif

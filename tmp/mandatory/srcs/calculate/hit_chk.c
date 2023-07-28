@@ -6,7 +6,7 @@
 /*   By: hyunghki <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 17:15:46 by hyunghki          #+#    #+#             */
-/*   Updated: 2023/07/24 14:02:27 by hyunghki         ###   ########.fr       */
+/*   Updated: 2023/07/28 14:02:32 by hyunghki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,20 @@ static int	hit_chk_sp(t_ray *ray, t_sphere *sp, t_rec *rec)
 
 static int	hit_chk_pl(t_ray *ray, t_plane *pl, t_rec *rec)
 {
-	(void)ray;
-	(void)pl;
-	(void)rec;
-	return (0);
+	double	t;
+	double	denom;
+
+	denom = vec_dot(ray->dir, pl->axis);
+	if (fabs(denom) < 0.001)
+		return (0);
+	t = vec_dot(vec_minus(pl->coord, ray->origin), pl->axis) / denom;
+	if (t < rec->min || rec->max < t)
+		return (0);
+	rec->t = t;
+    rec->p = vec_plus(ray->origin, vec_multi(ray->dir, rec->t));
+    chk_face(ray, rec, pl->axis);
+	rec->color = pl->rgb;
+	return (1);
 }
 
 static int	hit_chk_cy(t_ray *ray, t_cylinder *cy, t_rec *rec)
