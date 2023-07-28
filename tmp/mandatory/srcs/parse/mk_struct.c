@@ -6,7 +6,7 @@
 /*   By: hyunghki <hyunghki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 08:59:05 by hyunghki          #+#    #+#             */
-/*   Updated: 2023/07/24 11:09:26 by hyunghki         ###   ########.fr       */
+/*   Updated: 2023/07/28 11:27:54 by hyunghki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static t_amb	*mk_amb(t_lst *target)
 		ft_error();
 	target = target->nxt;
 	ft_get_rgb(&ret->rgb, target->data);
-	vec_multi(ret->rgb, ratio);
+	ret->rgb = vec_multi(ret->rgb, ratio);
 	return (ret);
 }
 
@@ -58,6 +58,7 @@ static t_light	*mk_light(t_lst *target)
 	if (ret->ratio < 0.0 || ret->ratio > 1.0)
 		ft_error();
 	target = target->nxt;
+	ft_get_rgb(&ret->rgb, target->data);
 	ret->rgb = initial_vec(1, 1, 1);
 	return (ret);
 }
