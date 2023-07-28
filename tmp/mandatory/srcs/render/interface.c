@@ -6,7 +6,7 @@
 /*   By: hyunghki <hyunghki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 09:40:07 by hyunghki          #+#    #+#             */
-/*   Updated: 2023/07/28 11:09:40 by hyunghki         ###   ########.fr       */
+/*   Updated: 2023/07/28 16:22:42 by hyunghki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static void	ft_initial_info(t_info *info, t_cam *cam)
 		u = vec_unit(vec_cross(initial_vec(0, 1, 0), w));
 	else
 		u = vec_unit(vec_cross(initial_vec(0, 0, -1), w));
-	v = vec_cross(w, u);
+	v = vec_unit(vec_cross(w, u));
 	info->origin = cam->coord;
 	info->horizontal = vec_multi(u, info->view_width);
 	info->vertical = vec_multi(v, info->view_height);

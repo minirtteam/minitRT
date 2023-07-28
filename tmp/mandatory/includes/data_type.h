@@ -6,7 +6,7 @@
 /*   By: hyunghki <hyunghki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 07:35:44 by hyunghki          #+#    #+#             */
-/*   Updated: 2023/07/28 12:06:33 by hyunghki         ###   ########.fr       */
+/*   Updated: 2023/07/28 16:46:59 by hyunghki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,12 @@ typedef struct s_vec3
 }	t_vec3;
 
 typedef t_vec3	t_color;
+
+typedef struct s_ray
+{
+	t_vec3	origin;
+	t_vec3	dir;
+}	t_ray;
 
 typedef struct s_amb
 {
@@ -78,7 +84,7 @@ typedef struct s_cylinder
 {
 	t_vec3	coord;
 	t_vec3	axis;
-	double	diameter;
+	double	radius;
 	double	height;
 	t_color	rgb;
 }	t_cylinder;

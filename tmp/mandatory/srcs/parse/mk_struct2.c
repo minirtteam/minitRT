@@ -6,7 +6,7 @@
 /*   By: hyunghki <hyunghki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 09:09:19 by hyunghki          #+#    #+#             */
-/*   Updated: 2023/07/28 11:29:51 by hyunghki         ###   ########.fr       */
+/*   Updated: 2023/07/28 16:47:41 by hyunghki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,10 @@ static t_cylinder	*mk_cy(t_lst *target)
 	target = target->nxt;
 	ft_get_axis(&ret->axis, target->data);
 	target = target->nxt;
-	ret->diameter = ft_atod(target->data);
-	if (ret->diameter < 0)
+	ret->radius = ft_atod(target->data);
+	if (ret->radius < 0)
 		ft_error();
+	ret->radius /= 2.0;
 	target = target->nxt;
 	ret->height = ft_atod(target->data);
 	if (ret->height < 0)
