@@ -6,7 +6,7 @@
 /*   By: hyunghki <hyunghki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 07:35:44 by hyunghki          #+#    #+#             */
-/*   Updated: 2023/07/29 09:27:01 by hyunghki         ###   ########.fr       */
+/*   Updated: 2023/07/29 11:33:26 by hyunghki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # define F_SP 2
 # define F_PL 3
 # define F_CY 4
+# define EPSILON 0.000001
 
 typedef struct s_lst
 {

@@ -6,7 +6,7 @@
 /*   By: hyunghki <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 17:15:46 by hyunghki          #+#    #+#             */
-/*   Updated: 2023/07/28 16:59:18 by hyunghki         ###   ########.fr       */
+/*   Updated: 2023/07/29 12:09:17 by hyunghki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,29 +37,31 @@ static int	hit_chk_sp(t_ray *ray, t_sphere *sp, t_rec *rec)
 	}
 	rec->t = root;
 	rec->p = ray_at(ray, rec->t);
-	set_face(rec, ray, vec_devide(vec_minus(rec->p, sp->coord), sp->radius));
+	set_normal(rec, ray, vec_devide(vec_minus(rec->p, sp->coord), sp->radius));
 	rec->color = sp->rgb;
     return (1);
 }
 
 static int	hit_chk_pl(t_ray *ray, t_plane *pl, t_rec *rec)
 {
-	double	root;
+	double	t;
 	double	denom;
 
 	denom = vec_dot(ray->dir, pl->axis);
-	if (fabs(denom) < 0.001)
+	if (fabs(denom) < EPSILON)
 		return (0);
-	root = vec_dot(vec_minus(pl->coord, ray->origin), pl->axis) / denom;
-	if (root < rec->min || rec->max < root)
+	t = vec_dot(vec_minus(pl->coord, ray->origin), pl->axis) / denom;
+	if (t < rec->min || rec->max < t)
 		return (0);
-	rec->t = root;
+	rec->t = t;
     rec->p = ray_at(ray, rec->t);
-    set_face(rec, ray, pl->axis);
+	// not yet
+    set_normal(rec, ray, pl->axis);
 	rec->color = pl->rgb;
 	return (1);
 }
 
+// not yet
 static int	hit_chk_cy(t_ray *ray, t_cylinder *cy, t_rec *rec)
 {
 	double	root;
@@ -77,7 +79,7 @@ static int	hit_chk_cy(t_ray *ray, t_cylinder *cy, t_rec *rec)
 		return (0);
 	rec->t = root;
 	rec->p = t;
-	set_face(rec, ray, cy->axis);
+	set_normal(rec, ray, cy->axis);
 	rec->color = cy->rgb;
 	return (1);
 }
