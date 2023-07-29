@@ -6,7 +6,7 @@
 /*   By: hyunghki <hyunghki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 09:40:07 by hyunghki          #+#    #+#             */
-/*   Updated: 2023/07/28 16:22:42 by hyunghki         ###   ########.fr       */
+/*   Updated: 2023/07/29 10:00:59 by hyunghki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,74 +16,28 @@
 
 static void	ft_initial_info(t_info *info, t_cam *cam)
 {
-	t_vec3	w;
-	t_vec3	u;
-	t_vec3	v;
+	double	focal_len;
+	double	cmp;
 
-	info->cam = cam;
-	info->aspect_ratio = (double)HEIGHT / (double)WIDTH;
-	info->view_width = 2.0 * tan(cam->fov * M_PI / 360.0);
-	info->view_height = info->aspect_ratio * info->view_width;
-	w = cam->axis;
-	if (vec_length(vec_cross(initial_vec(0, 1, 0), w)) != 0)
-		u = vec_unit(vec_cross(initial_vec(0, 1, 0), w));
+	cmp = vec_length(vec_cross(cam->axis, initial_vec(0, 1, 0)));
+	if (fabs(1.0 - cmp) < 0.001)
+		info->u_dir = vec_unit(vec_cross(cam->axis, initial_vec(0, 1, 0)));
 	else
-		u = vec_unit(vec_cross(initial_vec(0, 0, -1), w));
-	v = vec_unit(vec_cross(w, u));
+		info->u_dir = vec_unit(vec_cross(cam->axis, initial_vec(0, 0, -1)));
+	info->v_dir = vec_unit(vec_cross(info->u_dir, cam->axis));
 	info->origin = cam->coord;
-	info->horizontal = vec_multi(u, info->view_width);
-	info->vertical = vec_multi(v, info->view_height);
-	info->low_left = vec_minus(info->origin, vec_devide(info->horizontal, 2));
-	info->low_left = vec_minus(info->low_left, vec_devide(info->vertical, 2));
-	info->low_left = vec_minus(info->low_left, w);
+	focal_len = (double)WIDTH / 2.0 / tan(cam->fov * M_PI / 360.0);
+	info->low_left = vec_minus(\
+			vec_plus(info->origin, vec_multi(cam->axis, focal_len)), \
+			vec_plus(\
+				vec_multi(info->u_dir, (double)(WIDTH - 1) / 2), \
+				vec_multi(info->v_dir, (double)(HEIGHT - 1) / 2)));
 }
 
-static int	ft_mouse_hook(int keycode, int x, int y, t_data *data)
-{
-	t_info	*info;
-
-	(void)x;
-	(void)y;
-	info = data->info;
-	if (keycode == M_LEFT && info->cam->axis.y + 0.3 <= 1.0)
-		info->cam->axis.y += 0.3;
-	else if (keycode == M_RIGHT && info->cam->axis.y - 0.3 >= -1.0)
-		info->cam->axis.y -= 0.3;
-	else if (keycode == M_UP)
-		info->cam->coord.y += 3.0;
-	else if (keycode == M_DOWN)
-		info->cam->coord.y -= 3.0;
-	else
-		return (0);
-	ft_initial_info(info, info->cam);
-	print_image(data);
-		return (0);
-}
-
-static int	handle_key(int keycode, t_data *data)
+static int	ft_close_esc(int keycode)
 {
 	if (keycode == K_ESC)
 		exit(EXIT_SUCCESS);
-	else if (keycode == K_A)
-		data->info->cam->coord.x += 3.0;
-	else if (keycode == K_W)
-		data->info->cam->coord.z += 3.0;
-	else if (keycode == K_D)
-		data->info->cam->coord.x -= 3.0;
-	else if	(keycode == K_S)
-		data->info->cam->coord.z -= 3.0;
-	else if (keycode == K_LEFT && data->info->cam->axis.x - 0.1 >= -1.0)
-		data->info->cam->axis.x -= 0.1;
-	else if (keycode == K_UP && data->info->cam->axis.z + 0.1 <= 1.0)
-		data->info->cam->axis.z += 0.1;
-	else if (keycode == K_RIGHT && data->info->cam->axis.x + 0.1 <= 1.0)
-		data->info->cam->axis.x += 0.1;
-	else if	(keycode == K_DOWN && data->info->cam->axis.z - 0.1 >= -1.0)
-		data->info->cam->axis.z -= 0.1;
-	else
-		return (0);
-	ft_initial_info(data->info, data->info->cam);
-	print_image(data);
 	return (0);
 }
 
@@ -116,8 +70,7 @@ void	ft_render(t_amb *amb, t_cam *cam, t_lst *lights, t_lst *objs)
 	info.objs = objs;
 	data.info = &info;
 	print_image(&data);
-	mlx_mouse_hook(data.win, ft_mouse_hook, &data);
-	mlx_key_hook(data.win, handle_key, &data);
+	mlx_key_hook(data.win, ft_close_esc, NULL);
 	mlx_hook(data.win, 17, 1L, ft_close, NULL);
 	mlx_loop(data.mlx);
 }

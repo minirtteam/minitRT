@@ -6,7 +6,7 @@
 /*   By: hyunghki <hyunghki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 06:51:55 by hyunghki          #+#    #+#             */
-/*   Updated: 2023/07/28 11:29:41 by hyunghki         ###   ########.fr       */
+/*   Updated: 2023/07/29 09:44:21 by hyunghki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,19 +81,15 @@ void	ft_get_axis(t_vec3 *axis, char *s)
 		ft_error();
 	s[i] = '\0';
 	axis->x = ft_atod(s);
-	if (axis->x < -1 || axis->x > 1)
-		ft_error();
 	s += (i + 1);
 	i = ft_str_find(s, ',');
 	if (i == -1)
 		ft_error();
 	s[i] = '\0';
 	axis->y = ft_atod(s);
-	if (axis->y < -1 || axis->y > 1)
-		ft_error();
 	s += (i + 1);
 	axis->z = ft_atod(s);
-	if (axis->z < -1 || axis->z > 1)
+	if (fabs(1.0 - vec_length(*axis)) > 0.001)
 		ft_error();
 }
 

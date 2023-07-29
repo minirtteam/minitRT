@@ -6,7 +6,7 @@
 /*   By: hyunghki <hyunghki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 07:35:44 by hyunghki          #+#    #+#             */
-/*   Updated: 2023/07/28 16:46:59 by hyunghki         ###   ########.fr       */
+/*   Updated: 2023/07/29 09:27:01 by hyunghki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,16 +91,12 @@ typedef struct s_cylinder
 
 typedef struct s_info
 {
-	double	aspect_ratio;
-	double	view_height;
-	double	view_width;
 	t_amb	*amb;
-	t_cam	*cam;
 	t_lst	*lights;
 	t_lst	*objs;
 	t_vec3	origin;
-	t_vec3	horizontal;
-	t_vec3	vertical;
+	t_vec3	u_dir;
+	t_vec3	v_dir;
 	t_vec3	low_left;
 }	t_info;
 
