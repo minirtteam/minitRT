@@ -6,7 +6,7 @@
 /*   By: hyunghki <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 17:15:46 by hyunghki          #+#    #+#             */
-/*   Updated: 2023/07/29 16:08:15 by hyunghki         ###   ########.fr       */
+/*   Updated: 2023/07/29 16:49:27 by hyunghki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,35 @@ static int	hit_chk_pl(t_ray *ray, t_plane *pl, t_rec *rec)
 	return (1);
 }
 
-static int	hit_chk_cy(t_ray *ray, t_cylinder *cy, t_rec *rec)
+static int	cy_up_down(t_ray *ray, t_cylinder *cy, t_rec *rec)
+{
+	/**
+	double	root;
+	double	denom;
+	t_vec3	t;
+
+	denom = vec_dot(ray->dir, cy->axis);
+	root = vec_dot(vec_minus(cy->coord, ray->origin), cy->axis) / denom;
+	if (root < rec->min || rec->max < root)
+		return (0);
+	t = ray_at(ray, root);
+	if (t.y < -cy->height / 2 || t.y > cy->height / 2)
+		return (0);
+	if (vec_length(vec_minus(t, cy->coord)) > cy->radius)
+		return (0);
+	rec->t = root;
+	rec->p = t;
+	set_normal(rec, ray, cy->axis);
+	rec->color = cy->rgb;
+	return (1);
+	**/
+	(void)ray;
+	(void)cy;
+	(void)rec;
+	return (0);
+}
+
+static int	cy_side(t_ray *ray, t_cylinder *cy, t_rec *rec)
 {
 	t_vec3	d;
 	t_vec3	normal;
@@ -83,7 +111,8 @@ int	is_hit(t_ray *ray, t_lst *objs, t_rec *rec)
 	{
 		if ((objs->info == F_SP && hit_chk_sp(ray, objs->data, rec)) \
 			|| (objs->info == F_PL && hit_chk_pl(ray, objs->data, rec)) \
-			|| (objs->info == F_CY && hit_chk_cy(ray, objs->data, rec)))
+			|| (objs->info == F_CY && \
+			(cy_side(ray, objs->data, rec) || cy_up_down(ray, objs->data, rec))))
 		{
 			is_hit = 1;
 			rec->max = rec->t;
