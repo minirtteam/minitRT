@@ -6,7 +6,7 @@
 /*   By: hyunghki <hyunghki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 09:40:07 by hyunghki          #+#    #+#             */
-/*   Updated: 2023/07/29 12:08:07 by hyunghki         ###   ########.fr       */
+/*   Updated: 2023/07/29 15:13:07 by hyunghki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,8 @@
 static void	ft_initial_info(t_info *info, t_cam *cam)
 {
 	double	focal_len;
-	double	cmp;
 
-	cmp = vec_length(vec_cross(cam->axis, initial_vec(0, 1, 0)));
-	if (fabs(1.0 - cmp) < EPSILON)
+	if (vec_length(vec_cross(cam->axis, initial_vec(0, 1, 0))))
 		info->u_dir = vec_unit(vec_cross(cam->axis, initial_vec(0, 1, 0)));
 	else
 		info->u_dir = vec_unit(vec_cross(cam->axis, initial_vec(0, 0, 1)));

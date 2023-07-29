@@ -6,7 +6,7 @@
 /*   By: hyunghki <hyunghki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 06:51:55 by hyunghki          #+#    #+#             */
-/*   Updated: 2023/07/29 11:56:43 by hyunghki         ###   ########.fr       */
+/*   Updated: 2023/07/29 15:09:45 by hyunghki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void	ft_get_axis(t_vec3 *axis, char *s)
 	axis->y = ft_atod(s);
 	s += (i + 1);
 	axis->z = ft_atod(s);
-	if (fabs(1.0 - vec_length_squared(*axis)) > EPSILON)
+	if (vec_length_squared(*axis) != 1.0)
 		ft_error();
 }
 

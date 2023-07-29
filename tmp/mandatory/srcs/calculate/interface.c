@@ -6,7 +6,7 @@
 /*   By: hyunghki <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 09:41:45 by hyunghki          #+#    #+#             */
-/*   Updated: 2023/07/29 12:04:52 by hyunghki         ###   ########.fr       */
+/*   Updated: 2023/07/29 14:42:21 by hyunghki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_color	ft_calculate(t_ray *ray, t_info *info)
 	t_rec	rec;
 	double	t;
 
-	rec.min = EPSILON;
+	rec.min = F_EPSILON;
 	rec.max = INFINITY;
 	if (is_hit(ray, info->objs, &rec))
 		return (phong_light(ray, &rec, info));
