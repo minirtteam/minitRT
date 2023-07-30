@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   interface.c                                        :+:      :+:    :+:   */
+/*   interface_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyunghki <hyunghki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 09:41:45 by hyunghki          #+#    #+#             */
-/*   Updated: 2023/07/30 15:37:27 by hyunghki         ###   ########.fr       */
+/*   Updated: 2023/07/30 15:37:06 by hyunghki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "calculate.h"
-#include "vector.h"
+#include "calculate_bonus.h"
+#include "vector_bonus.h"
 
 t_color	ft_calculate(t_ray *ray, t_info *info)
 {

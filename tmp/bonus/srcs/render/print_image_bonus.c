@@ -1,0 +1,65 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   print_image_bonus.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hyunghki <hyunghki@student.42seoul.kr>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/07/19 09:59:53 by hyunghki          #+#    #+#             */
+/*   Updated: 2023/07/30 16:25:25 by hyunghki         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "render_bonus.h"
+#include "vector_bonus.h"
+#include "calculate_bonus.h"
+
+static unsigned int	get_color(t_color rgb)
+{
+	int	r;
+	int	g;
+	int	b;
+
+	r = rgb.x * 255;
+	g = rgb.y * 255;
+	b = rgb.z * 255;
+	return ((r << 16) + (g << 8) + b);
+}
+
+static void	ft_put_pixel(t_data *data, int x, int y, unsigned int color)
+{
+	char	*dst;
+
+	dst = data->addr + (y * data->line_length + x * (data->bpp / 8));
+	*(unsigned int *)dst = color;
+}
+
+static void	get_ray(t_ray *ray, t_info *info, double s, double t)
+{
+	ray->origin = info->origin;
+	ray->dir = info->low_left;
+	ray->dir = vec_plus(ray->dir, vec_multi(info->u_dir, s));
+	ray->dir = vec_plus(ray->dir, vec_multi(info->v_dir, t));
+	ray->dir = vec_minus(ray->dir, info->origin);
+	ray->dir = vec_unit(ray->dir);
+}
+
+void	print_image(t_data *data)
+{
+	int			y;
+	int			x;
+	t_ray		ray;
+
+	mlx_clear_window(data->mlx, data->win);
+	y = -1;
+	while (++y < HEIGHT)
+	{
+		x = -1;
+		while (++x < WIDTH)
+		{
+			get_ray(&ray, data->info, x, HEIGHT - 1 - y);
+			ft_put_pixel(data, x, y, get_color(ft_calculate(&ray, data->info)));
+		}
+	}
+	mlx_put_image_to_window(data->mlx, data->win, data->img, 0, 0);
+}

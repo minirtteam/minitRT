@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   data_type.h                                        :+:      :+:    :+:   */
+/*   data_type_bonus.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyunghki <hyunghki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 07:35:44 by hyunghki          #+#    #+#             */
-/*   Updated: 2023/07/30 15:33:19 by hyunghki         ###   ########.fr       */
+/*   Updated: 2023/07/30 16:42:15 by hyunghki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DATA_TYPE_H
-# define DATA_TYPE_H
+#ifndef DATA_TYPE_BONUS_H
+# define DATA_TYPE_BONUS_H
 
 # define F_DATA_CHAR 1
 # define F_DATA_LST 2
@@ -20,6 +20,7 @@
 # define F_SP 2
 # define F_PL 3
 # define F_CY 4
+# define F_CN 5
 
 typedef struct s_lst
 {
@@ -88,6 +89,15 @@ typedef struct s_cylinder
 	double	height;
 	t_color	rgb;
 }	t_cylinder;
+
+typedef struct s_cone
+{
+	t_vec3	coord;
+	t_vec3	axis;
+	double	radius;
+	double	height;
+	t_color	rgb;
+}	t_cone;
 
 typedef struct s_info
 {

@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lights.c                                           :+:      :+:    :+:   */
+/*   lights_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyunghki <hyunghki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 14:47:02 by hyunghki          #+#    #+#             */
-/*   Updated: 2023/07/30 15:44:19 by hyunghki         ###   ########.fr       */
+/*   Updated: 2023/07/30 15:48:02 by hyunghki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "vector.h"
-#include "calculate.h"
+#include "vector_bonus.h"
+#include "calculate_bonus.h"
 
 static int	is_shadow(t_light *light, t_rec *rec, t_lst *objs)
 {

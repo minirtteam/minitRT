@@ -1,29 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   interface.c                                        :+:      :+:    :+:   */
+/*   get_next_line_bonus.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyunghki <hyunghki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/24 09:41:45 by hyunghki          #+#    #+#             */
-/*   Updated: 2023/07/30 15:37:27 by hyunghki         ###   ########.fr       */
+/*   Created: 2023/03/21 16:38:06 by hyunghki          #+#    #+#             */
+/*   Updated: 2023/07/30 15:25:11 by hyunghki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "calculate.h"
-#include "vector.h"
+#ifndef GET_NEXT_LINE_BONUS_H
+# define GET_NEXT_LINE_BONUS_H
 
-t_color	ft_calculate(t_ray *ray, t_info *info)
-{
-	t_rec	rec;
-	double	t;
+# include <unistd.h>
+# include <stdlib.h>
 
-	rec.min = 0.001;
-	rec.max = INFINITY;
-	if (is_hit(ray, info->objs, &rec))
-		return (phong_light(ray, &rec, info));
-	t = 0.5 * (ray->dir.y + 1.0);
-	return (vec_plus(\
-			vec_multi(initial_vec(1.0, 1.0, 1.0), (1.0 - t)), \
-			vec_multi(initial_vec(0.5, 0.7, 1.0), t)));
-}
+# define BUFFER_SIZE 4096
+
+char	*get_next_line(int fd);
+int		ft_gnl_strncat(char **s1, char *s2, int s1_size, int s2_size);
+
+#endif

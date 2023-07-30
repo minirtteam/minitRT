@@ -1,29 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   interface.c                                        :+:      :+:    :+:   */
+/*   print_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyunghki <hyunghki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/24 09:41:45 by hyunghki          #+#    #+#             */
-/*   Updated: 2023/07/30 15:37:27 by hyunghki         ###   ########.fr       */
+/*   Created: 2023/07/17 10:39:11 by hyunghki          #+#    #+#             */
+/*   Updated: 2023/07/30 15:28:41 by hyunghki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "calculate.h"
-#include "vector.h"
+#include "utils_bonus.h"
 
-t_color	ft_calculate(t_ray *ray, t_info *info)
+void	ft_putstr_fd(char *s, int fd)
 {
-	t_rec	rec;
-	double	t;
+	while (*s)
+	{
+		write(fd, s, 1);
+		s++;
+	}
+}
 
-	rec.min = 0.001;
-	rec.max = INFINITY;
-	if (is_hit(ray, info->objs, &rec))
-		return (phong_light(ray, &rec, info));
-	t = 0.5 * (ray->dir.y + 1.0);
-	return (vec_plus(\
-			vec_multi(initial_vec(1.0, 1.0, 1.0), (1.0 - t)), \
-			vec_multi(initial_vec(0.5, 0.7, 1.0), t)));
+void	ft_error(void)
+{
+	ft_putstr_fd("Error\n", 2);
+	exit(EXIT_FAILURE);
 }
