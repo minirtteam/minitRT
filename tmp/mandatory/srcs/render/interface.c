@@ -6,7 +6,7 @@
 /*   By: hyunghki <hyunghki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 09:40:07 by hyunghki          #+#    #+#             */
-/*   Updated: 2023/07/29 15:13:07 by hyunghki         ###   ########.fr       */
+/*   Updated: 2023/07/30 12:10:45 by hyunghki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,12 @@ static void	ft_initial_info(t_info *info, t_cam *cam)
 		info->u_dir = vec_unit(vec_cross(cam->axis, initial_vec(0, 0, 1)));
 	info->v_dir = vec_unit(vec_cross(info->u_dir, cam->axis));
 	info->origin = cam->coord;
-	focal_len = (double)WIDTH / 2.0 / tan(cam->fov * M_PI / 360.0);
+	focal_len = (double)WIDTH / 2.0 / tan(cam->fov / 2.0 * M_PI / 180.0);
 	info->low_left = vec_minus(\
 			vec_plus(info->origin, vec_multi(cam->axis, focal_len)), \
 			vec_plus(\
-				vec_multi(info->u_dir, (double)(WIDTH - 1) / 2), \
-				vec_multi(info->v_dir, (double)(HEIGHT - 1) / 2)));
+			vec_multi(info->u_dir, (double)(WIDTH - 1) / 2), \
+			vec_multi(info->v_dir, (double)(HEIGHT - 1) / 2)));
 }
 
 static int	ft_close_esc(int keycode)

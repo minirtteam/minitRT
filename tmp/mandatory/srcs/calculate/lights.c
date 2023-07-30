@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lights.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyunghki <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: hyunghki <hyunghki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 14:47:02 by hyunghki          #+#    #+#             */
-/*   Updated: 2023/07/29 16:07:00 by hyunghki         ###   ########.fr       */
+/*   Updated: 2023/07/30 13:16:30 by hyunghki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static int	is_shadow(t_light *light, t_rec *rec, t_lst *objs)
 	light_len = vec_length(light_dir);
 	light_ray.origin = vec_plus(rec->p, vec_multi(rec->normal, 0.001));
 	light_ray.dir = vec_unit(light_dir);
-	rec_tmp.min = F_EPSILON;
+	rec_tmp.min = 0.001;
 	rec_tmp.max = light_len;
 	return (is_hit(&light_ray, objs, &rec_tmp));
 }
