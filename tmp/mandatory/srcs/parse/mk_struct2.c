@@ -37,6 +37,7 @@ static t_plane	*mk_pl(t_lst *target)
 	ft_get_coord(&ret->coord, target->data);
 	target = target->nxt;
 	ft_get_axis(&ret->axis, target->data);
+	ret->axis = vec_unit(ret->axis);
 	target = target->nxt;
 	ft_get_rgb(&ret->rgb, target->data);
 	return (ret);

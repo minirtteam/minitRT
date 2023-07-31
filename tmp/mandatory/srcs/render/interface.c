@@ -17,6 +17,7 @@
 static void	ft_initial_info(t_info *info, t_cam *cam)
 {
 	double	focal_len;
+	double	dir;
 
 	if (vec_length(vec_cross(cam->axis, initial_vec(0, 1, 0))))
 		info->u_dir = vec_unit(vec_cross(cam->axis, initial_vec(0, 1, 0)));
@@ -49,7 +50,7 @@ static int	ft_close(int keycode)
 void	ft_render(t_amb *amb, t_cam *cam, t_lst *lights, t_lst *objs)
 {
 	t_data	data;
-	t_info	info;
+	t_world	world;
 
 	data.mlx = mlx_init();
 	if (data.mlx == NULL)

@@ -48,7 +48,6 @@ typedef struct s_ray
 
 typedef struct s_amb
 {
-	t_color	min_rgb;
 	t_color	rgb;
 }	t_amb;
 
@@ -89,7 +88,7 @@ typedef struct s_cylinder
 	t_color	rgb;
 }	t_cylinder;
 
-typedef struct s_info
+typedef struct s_world
 {
 	t_amb	*amb;
 	t_lst	*lights;
@@ -99,5 +98,6 @@ typedef struct s_info
 	t_vec3	v_dir;
 	t_vec3	low_left;
 }	t_info;
+
 
 #endif
