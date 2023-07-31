@@ -6,7 +6,7 @@
 /*   By: hyunghki <hyunghki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 10:38:28 by hyunghki          #+#    #+#             */
-/*   Updated: 2023/07/30 15:28:30 by hyunghki         ###   ########.fr       */
+/*   Updated: 2023/07/31 12:04:02 by hyunghki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,21 @@ void	*ft_calloc(int size)
 		i++;
 	}
 	return (target);
+}
+
+void	ft_create_mutex(t_data *data)
+{
+	if (pthread_mutex_init(&data->start, NULL) != 0)
+		ft_error();
+	if (pthread_mutex_init(&data->put_img, NULL) != 0)
+		ft_error();
+}
+
+void	ft_join(int n, t_thr *thr)
+{
+	int	i;
+
+	i = -1;
+	while (++i < n)
+		pthread_join(thr[i].thr, NULL);
 }

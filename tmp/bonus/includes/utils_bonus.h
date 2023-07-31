@@ -6,13 +6,14 @@
 /*   By: hyunghki <hyunghki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 10:51:54 by hyunghki          #+#    #+#             */
-/*   Updated: 2023/07/30 15:25:42 by hyunghki         ###   ########.fr       */
+/*   Updated: 2023/07/31 12:02:26 by hyunghki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef UTILS_BONUS_H
 # define UTILS_BONUS_H
 
+# include <pthread.h>
 # include <unistd.h>
 # include <stdlib.h>
 # include "data_type_bonus.h"
@@ -31,5 +32,7 @@ t_lst	*ft_split_lst(char *s);
 void	lst_push(t_lst **target, t_lst *to_push);
 t_lst	*mk_lst(void *data, int data_type, int info);
 void	*ft_lst_free(t_lst *target);
+void	ft_join(int n, t_thr *thr);
+void	ft_create_mutex(t_data *data);
 
 #endif

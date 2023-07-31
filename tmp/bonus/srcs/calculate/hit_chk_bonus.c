@@ -6,7 +6,7 @@
 /*   By: hyunghki <hyunghki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 17:15:46 by hyunghki          #+#    #+#             */
-/*   Updated: 2023/07/30 16:32:36 by hyunghki         ###   ########.fr       */
+/*   Updated: 2023/07/31 15:28:24 by hyunghki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,21 +47,21 @@ static int	hit_chk_pl(t_ray *ray, t_plane *pl, t_rec *rec)
 	return (1);
 }
 
-static int	hit_chk_cy(t_ray *ray, t_cylinder *cy, t_rec *rec)
+static int	hit_chk_cy_cn(t_ray *ray, t_cy_cn *target, t_rec *rec, int is_cy)
 {
 	double	height;
 
-	height = cy->height / 2;
-	return ((cy_side(ray, cy, rec) \
-			|| cy_up_down(ray, cy, rec, height) \
-			|| cy_up_down(ray, cy, rec, -height)));
-}
-
-static int	hit_chk_cn(t_ray *ray, t_cone *cn, t_rec *rec)
-{
-	(void)ray;
-	(void)cn;
-	(void)rec;
+	height = target->height / 2;
+	if (is_cy)
+	{
+		return (cy_side(ray, target, rec) \
+				|| cy_cn_up_down(ray, target, rec, height) \
+				|| cy_cn_up_down(ray, target, rec, -height));
+	}
+	/**
+	return (cn_side(ray, target, rec) \
+			|| cy_cn_up_down(ray, target, rec, -height));
+	**/
 	return (0);
 }
 
@@ -74,8 +74,8 @@ int	is_hit(t_ray *ray, t_lst *objs, t_rec *rec)
 	{
 		if ((objs->info == F_SP && hit_chk_sp(ray, objs->data, rec)) \
 			|| (objs->info == F_PL && hit_chk_pl(ray, objs->data, rec)) \
-			|| (objs->info == F_CY && hit_chk_cy(ray, objs->data, rec)) \
-			|| (objs->info == F_CN && hit_chk_cn(ray, objs->data, rec)))
+			|| (objs->info == F_CY && hit_chk_cy_cn(ray, objs->data, rec, 1)) \
+			|| (objs->info == F_CN && hit_chk_cy_cn(ray, objs->data, rec, 0)))
 		{
 			is_hit = 1;
 			rec->max = rec->t;

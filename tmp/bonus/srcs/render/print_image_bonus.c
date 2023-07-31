@@ -6,10 +6,11 @@
 /*   By: hyunghki <hyunghki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 09:59:53 by hyunghki          #+#    #+#             */
-/*   Updated: 2023/07/30 16:25:25 by hyunghki         ###   ########.fr       */
+/*   Updated: 2023/07/31 15:08:27 by hyunghki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "utils_bonus.h"
 #include "render_bonus.h"
 #include "vector_bonus.h"
 #include "calculate_bonus.h"
@@ -34,32 +35,70 @@ static void	ft_put_pixel(t_data *data, int x, int y, unsigned int color)
 	*(unsigned int *)dst = color;
 }
 
-static void	get_ray(t_ray *ray, t_info *info, double s, double t)
+static void	print_img_exe(t_data *data, t_info *info, int st_col, int en_col)
 {
-	ray->origin = info->origin;
-	ray->dir = info->low_left;
-	ray->dir = vec_plus(ray->dir, vec_multi(info->u_dir, s));
-	ray->dir = vec_plus(ray->dir, vec_multi(info->v_dir, t));
-	ray->dir = vec_minus(ray->dir, info->origin);
-	ray->dir = vec_unit(ray->dir);
-}
+	t_ray	ray;
+	int		y;
+	int		x;
 
-void	print_image(t_data *data)
-{
-	int			y;
-	int			x;
-	t_ray		ray;
-
-	mlx_clear_window(data->mlx, data->win);
 	y = -1;
 	while (++y < HEIGHT)
 	{
-		x = -1;
-		while (++x < WIDTH)
+		x = st_col - 1;
+		while (++x < en_col)
 		{
-			get_ray(&ray, data->info, x, HEIGHT - 1 - y);
-			ft_put_pixel(data, x, y, get_color(ft_calculate(&ray, data->info)));
+			ray.origin = info->origin;
+			ray.dir = info->low_left;
+			ray.dir = vec_plus(ray.dir, vec_multi(info->u_dir, x));
+			ray.dir = vec_plus(ray.dir, vec_multi(info->v_dir, HEIGHT - 1 - y));
+			ray.dir = vec_minus(ray.dir, info->origin);
+			ray.dir = vec_unit(ray.dir);
+			ft_put_pixel(data, x, y, get_color(ft_calculate(&ray, info)));
 		}
 	}
+	pthread_mutex_lock(&data->put_img);
 	mlx_put_image_to_window(data->mlx, data->win, data->img, 0, 0);
+	pthread_mutex_unlock(&data->put_img);
+}
+
+static void	*print_img_help(void *arg)
+{
+	t_thr		*thr;
+	int			is_error;
+
+	thr = arg;
+	pthread_mutex_lock(&thr->data->start);
+	is_error = thr->data->is_error;
+	pthread_mutex_unlock(&thr->data->start);
+	if (is_error != 0)
+		return (NULL);
+	print_img_exe(thr->data, thr->data->info, thr->st_col, thr->en_col);
+	return (NULL);
+}
+
+void	print_img(t_data *data)
+{
+	t_thr		*thr;
+	int			split_size;
+	int			i;
+
+	if (SCREEN == 0 || WIDTH % SCREEN != 0)
+		ft_error();
+	thr = ft_calloc(sizeof(t_thr) * SCREEN);
+	mlx_clear_window(data->mlx, data->win);
+	split_size = WIDTH / SCREEN;
+	i = -1;
+	pthread_mutex_lock(&data->start);
+	while (++i < SCREEN)
+	{
+		thr[i].data = data;
+		thr[i].st_col = i * split_size;
+		thr[i].en_col = (i + 1) * split_size;
+		if (pthread_create(&thr[i].thr, NULL, print_img_help, thr + i) != 0)
+			data->is_error = 1;
+	}
+	pthread_mutex_unlock(&data->start);
+	ft_join(SCREEN, thr);
+	if (data->is_error != 0)
+		ft_error();
 }

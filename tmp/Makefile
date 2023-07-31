@@ -6,13 +6,13 @@
 #    By: hyunghki <hyunghki@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/17 17:57:28 by hyunghki          #+#    #+#              #
-#    Updated: 2023/07/30 15:34:47 by hyunghki         ###   ########.fr        #
+#    Updated: 2023/07/31 12:09:44 by hyunghki         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME= miniRT
 CFLAGS= -Wall -Werror -Wextra
-DEBUG_FLAGS= -g3 -fsanitize=address
+DEBUG_FLAGS= -g3 -fsanitize=thread
 LDFLAGS= \
 -Lmlx -lmlx -framework OpenGL -framework Appkit \
 -lm
@@ -99,7 +99,7 @@ bonus:
 
 $(NAME): $(OBJ_FILE)
 	@make -C mlx
-	$(CC) -o $@ $^ $(LDFLAGS)
+	$(CC) -o $@ $^ $(LDFLAGS) $(DEBUG_FLAG)
 
 %.o: %.c
-	$(CC) $(CFLAGS) -o $@ -c $< $(INCLUDE)
+	$(CC) $(CFLAGS) -o $@ -c $< $(INCLUDE) $(DEBUG_FLAG)
