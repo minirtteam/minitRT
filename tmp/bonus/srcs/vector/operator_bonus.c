@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   operator.c                                         :+:      :+:    :+:   */
+/*   operator_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyunghki <hyunghki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 09:29:13 by hyunghki          #+#    #+#             */
-/*   Updated: 2023/07/29 16:56:24 by hyunghki         ###   ########.fr       */
+/*   Updated: 2023/07/30 15:27:16 by hyunghki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "vector.h"
+#include "vector_bonus.h"
 
 t_vec3	initial_vec(double x, double y, double z)
 {

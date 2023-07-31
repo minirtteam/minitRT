@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hit_chk_utils.c                                    :+:      :+:    :+:   */
+/*   hit_chk_utils_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyunghki <hyunghki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 10:08:16 by hyunghki          #+#    #+#             */
-/*   Updated: 2023/07/30 15:15:36 by hyunghki         ###   ########.fr       */
+/*   Updated: 2023/07/31 14:14:10 by hyunghki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "calculate.h"
-#include "vector.h"
+#include "calculate_bonus.h"
+#include "vector_bonus.h"
 
 void	set_normal(t_rec *rec, t_ray *ray, t_vec3 normal)
 {
@@ -42,28 +42,28 @@ int	is_intersect(t_rec *rec, double a, double half_b, double c)
 	return (1);
 }
 
-int	cy_up_down(t_ray *ray, t_cylinder *cy, t_rec *rec, double height)
+int	cy_cn_up_down(t_ray *ray, t_cy_cn *target, t_rec *rec, double height)
 {
 	double	denom;
 	double	root;
 	t_vec3	circle_coord;
 	t_vec3	p;
 
-	circle_coord = vec_plus(cy->coord, vec_multi(cy->axis, height));
-	denom = vec_dot(ray->dir, cy->axis);
-	root = vec_dot(vec_minus(circle_coord, ray->origin), cy->axis) / denom;
+	circle_coord = vec_plus(target->coord, vec_multi(target->axis, height));
+	denom = vec_dot(ray->dir, target->axis);
+	root = vec_dot(vec_minus(circle_coord, ray->origin), target->axis) / denom;
 	if (root < rec->min || rec->max < root)
 		return (0);
 	p = ray_at(ray, root);
-	if (fabs(vec_length(vec_minus(circle_coord, p))) > cy->radius)
+	if (fabs(vec_length(vec_minus(circle_coord, p))) > target->radius)
 		return (0);
 	rec->t = root;
 	rec->p = p;
 	if (height > 0)
-		set_normal(rec, ray, cy->axis);
+		set_normal(rec, ray, target->axis);
 	else
-		set_normal(rec, ray, vec_multi(cy->axis, -1));
-	rec->color = cy->rgb;
+		set_normal(rec, ray, vec_multi(target->axis, -1));
+	rec->color = target->rgb;
 	return (1);
 }
 
@@ -90,4 +90,12 @@ int	cy_side(t_ray *ray, t_cylinder *cy, t_rec *rec)
 	set_normal(rec, ray, vec_unit(normal));
 	rec->color = cy->rgb;
 	return (1);
+}
+
+int	cn_side(t_ray *ray, t_cone *cn, t_rec *rec)
+{
+	(void)ray;
+	(void)cn;
+	(void)rec;
+	return (0);
 }

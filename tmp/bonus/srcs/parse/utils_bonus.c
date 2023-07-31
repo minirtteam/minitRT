@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   utils_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyunghki <hyunghki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 06:51:55 by hyunghki          #+#    #+#             */
-/*   Updated: 2023/07/29 15:09:45 by hyunghki         ###   ########.fr       */
+/*   Updated: 2023/07/30 15:30:50 by hyunghki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "vector.h"
-#include "parse.h"
-#include "utils.h"
-#include "get_next_line.h"
+#include "vector_bonus.h"
+#include "parse_bonus.h"
+#include "utils_bonus.h"
+#include "get_next_line_bonus.h"
 
 static t_lst	*ft_mk_node(char *s)
 {

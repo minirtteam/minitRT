@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mk_struct2.c                                       :+:      :+:    :+:   */
+/*   mk_struct2_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyunghki <hyunghki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 09:09:19 by hyunghki          #+#    #+#             */
-/*   Updated: 2023/07/28 16:47:41 by hyunghki         ###   ########.fr       */
+/*   Updated: 2023/07/31 14:01:19 by hyunghki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parse.h"
-#include "utils.h"
+#include "parse_bonus.h"
+#include "utils_bonus.h"
 
 static t_sphere	*mk_sp(t_lst *target)
 {
@@ -37,15 +37,14 @@ static t_plane	*mk_pl(t_lst *target)
 	ft_get_coord(&ret->coord, target->data);
 	target = target->nxt;
 	ft_get_axis(&ret->axis, target->data);
-	ret->axis = vec_unit(ret->axis);
 	target = target->nxt;
 	ft_get_rgb(&ret->rgb, target->data);
 	return (ret);
 }
 
-static t_cylinder	*mk_cy(t_lst *target)
+static t_cy_cn	*mk_cy_cn(t_lst *target)
 {
-	t_cylinder	*ret;
+	t_cy_cn	*ret;
 
 	ret = ft_calloc(sizeof(t_cylinder));
 	ft_get_coord(&ret->coord, target->data);
@@ -75,7 +74,9 @@ void	ft_parse_objs(t_lst **objs, t_lst *target)
 	else if (ft_strcmp(target->data, "pl") == 0 && target->size == 4)
 		to_push = mk_lst(mk_pl(target->nxt), F_DATA_OBJS, F_PL);
 	else if (ft_strcmp(target->data, "cy") == 0 && target->size == 6)
-		to_push = mk_lst(mk_cy(target->nxt), F_DATA_OBJS, F_CY);
+		to_push = mk_lst(mk_cy_cn(target->nxt), F_DATA_OBJS, F_CY);
+	else if (ft_strcmp(target->data, "cn") == 0 && target->size == 6)
+		to_push = mk_lst(mk_cy_cn(target->nxt), F_DATA_OBJS, F_CN);
 	else
 		ft_error();
 	lst_push(objs, to_push);

@@ -1,29 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   coord_cal2.c                                       :+:      :+:    :+:   */
+/*   print_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyunghki <hyunghki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/28 14:02:52 by hyunghki          #+#    #+#             */
-/*   Updated: 2023/07/30 13:58:21 by hyunghki         ###   ########.fr       */
+/*   Created: 2023/07/17 10:39:11 by hyunghki          #+#    #+#             */
+/*   Updated: 2023/07/30 15:28:41 by hyunghki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "vector.h"
+#include "utils_bonus.h"
 
-t_vec3	ray_at(t_ray *ray, double t)
+void	ft_putstr_fd(char *s, int fd)
 {
-	return (vec_plus(ray->origin, vec_multi(ray->dir, t)));
+	while (*s)
+	{
+		write(fd, s, 1);
+		s++;
+	}
 }
 
-t_vec3	vec_unit(t_vec3 v)
+void	ft_error(void)
 {
-	double	len;
-
-	len = vec_length(v);
-	v.x /= len;
-	v.y /= len;
-	v.z /= len;
-	return (v);
+	ft_putstr_fd("Error\n", 2);
+	exit(EXIT_FAILURE);
 }

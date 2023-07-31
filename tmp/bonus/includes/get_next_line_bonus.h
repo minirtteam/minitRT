@@ -1,29 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   coord_cal2.c                                       :+:      :+:    :+:   */
+/*   get_next_line_bonus.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyunghki <hyunghki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/28 14:02:52 by hyunghki          #+#    #+#             */
-/*   Updated: 2023/07/30 13:58:21 by hyunghki         ###   ########.fr       */
+/*   Created: 2023/03/21 16:38:06 by hyunghki          #+#    #+#             */
+/*   Updated: 2023/07/31 14:36:53 by hyunghki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "vector.h"
+#ifndef GET_NEXT_LINE_BONUS_H
+# define GET_NEXT_LINE_BONUS_H
 
-t_vec3	ray_at(t_ray *ray, double t)
-{
-	return (vec_plus(ray->origin, vec_multi(ray->dir, t)));
-}
+# include <unistd.h>
+# include <stdlib.h>
 
-t_vec3	vec_unit(t_vec3 v)
-{
-	double	len;
+# define BUFFER_SIZE 4096
 
-	len = vec_length(v);
-	v.x /= len;
-	v.y /= len;
-	v.z /= len;
-	return (v);
-}
+char	*get_next_line(int fd);
+int		ft_gnl_strncat(char **s1, char *s2, int s1_size, int s2_size);
+
+#endif

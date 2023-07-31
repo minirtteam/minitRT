@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vector.h                                           :+:      :+:    :+:   */
+/*   vector_bonus.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyunghki <hyunghki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 09:32:29 by hyunghki          #+#    #+#             */
-/*   Updated: 2023/07/29 16:55:13 by hyunghki         ###   ########.fr       */
+/*   Updated: 2023/07/30 15:25:52 by hyunghki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef VECTOR_H
-# define VECTOR_H
+#ifndef VECTOR_BONUS_H
+# define VECTOR_BONUS_H
 
-# include "data_type.h"
+# include "data_type_bonus.h"
 # include "math.h"
 
 t_vec3	initial_vec(double x, double y, double z);

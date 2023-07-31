@@ -6,11 +6,12 @@
 /*   By: hyunghki <hyunghki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 09:59:53 by hyunghki          #+#    #+#             */
-/*   Updated: 2023/07/28 11:15:12 by hyunghki         ###   ########.fr       */
+/*   Updated: 2023/07/29 09:52:12 by hyunghki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "render.h"
+#include "vector.h"
 #include "calculate.h"
 
 static unsigned int	get_color(t_color rgb)
@@ -33,6 +34,16 @@ static void	ft_put_pixel(t_data *data, int x, int y, unsigned int color)
 	*(unsigned int *)dst = color;
 }
 
+static void	get_ray(t_ray *ray, t_info *info, double s, double t)
+{
+	ray->origin = info->origin;
+	ray->dir = info->low_left;
+	ray->dir = vec_plus(ray->dir, vec_multi(info->u_dir, s));
+	ray->dir = vec_plus(ray->dir, vec_multi(info->v_dir, t));
+	ray->dir = vec_minus(ray->dir, info->origin);
+	ray->dir = vec_unit(ray->dir);
+}
+
 void	print_image(t_data *data)
 {
 	int			y;
@@ -46,9 +57,8 @@ void	print_image(t_data *data)
 		x = -1;
 		while (++x < WIDTH)
 		{
-			s = (double)(WIDTH - x) / (WIDTH - 1);
-			t = (double)(HEIGHT - 1 - y) / (HEIGHT - 1);
-			ft_put_pixel(data, x, y, get_color(ft_calculate(data->info, s, t)));
+			get_ray(&ray, data->info, x, HEIGHT - 1 - y);
+			ft_put_pixel(data, x, y, get_color(ft_calculate(&ray, data->info)));
 		}
 	}
 	mlx_put_image_to_window(data->mlx, data->win, data->img, 0, 0);
