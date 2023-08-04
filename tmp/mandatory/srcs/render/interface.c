@@ -6,7 +6,7 @@
 /*   By: hyunghki <hyunghki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 09:40:07 by hyunghki          #+#    #+#             */
-/*   Updated: 2023/07/30 12:10:45 by hyunghki         ###   ########.fr       */
+/*   Updated: 2023/08/03 18:20:08 by hyunghki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "utils.h"
 #include "vector.h"
 
-static void	ft_initial_info(t_info *info, t_cam *cam)
+static void	ft_initial_info(t_info *info, t_cam *cam, t_amb *amb, t_lst *lights)
 {
 	double	focal_len;
 
@@ -30,12 +30,56 @@ static void	ft_initial_info(t_info *info, t_cam *cam)
 			vec_plus(\
 			vec_multi(info->u_dir, (double)(WIDTH - 1) / 2), \
 			vec_multi(info->v_dir, (double)(HEIGHT - 1) / 2)));
+	info->cam = cam;
+	info->amb = amb;
+	info->lights = lights;
 }
 
-static int	ft_close_esc(int keycode)
+static int	ft_handle_mouse(int keycode, int x, int y, t_data *data)
 {
+	t_vec3	look_at;
+	t_info	*info;
+
+	info = data->info;
+	if (keycode == K_SCROLL_CLICK)
+	{
+		look_at = info->low_left;
+		look_at = vec_plus(look_at, vec_multi(info->u_dir, x));
+		look_at = vec_plus(look_at, vec_multi(info->v_dir, HEIGHT - 1 - y));
+		info->cam->axis = vec_unit(vec_minus(look_at, info->origin));
+	}
+	else if (keycode == K_SCROLL_UP)
+		info->cam->coord.y += 3.0;
+	else if (keycode == K_SCROLL_DOWN)
+		info->cam->coord.y -= 3.0;
+	else
+		return (0);
+	ft_initial_info(info, info->cam, info->amb, info->lights);
+	print_image(data);
+	return (0);
+}
+
+static int	ft_handle_key(int keycode, t_data *data)
+{
+	t_info	*info;
+	t_cam	*cam;
+
+	info = data->info;
+	cam = info->cam;
 	if (keycode == K_ESC)
 		exit(EXIT_SUCCESS);
+	else if (keycode == K_A)
+		cam->coord = vec_minus(cam->coord, vec_multi(info->u_dir, 3));
+	else if (keycode == K_W)
+		cam->coord = vec_plus(cam->coord, vec_multi(cam->axis, 3));
+	else if (keycode == K_D)
+		cam->coord = vec_plus(cam->coord, vec_multi(info->u_dir, 3));
+	else if (keycode == K_S)
+		cam->coord = vec_minus(cam->coord, vec_multi(cam->axis, 3));
+	else
+		return (0);
+	ft_initial_info(info, info->cam, info->amb, info->lights);
+	print_image(data);
 	return (0);
 }
 
@@ -62,13 +106,12 @@ void	ft_render(t_amb *amb, t_cam *cam, t_lst *lights, t_lst *objs)
 		ft_error();
 	data.addr = mlx_get_data_addr(data.img, &data.bpp, \
 			&data.line_length, &data.endian);
-	ft_initial_info(&info, cam);
-	info.amb = amb;
-	info.lights = lights;
+	ft_initial_info(&info, cam, amb, lights);
 	info.objs = objs;
 	data.info = &info;
 	print_image(&data);
-	mlx_key_hook(data.win, ft_close_esc, NULL);
+	mlx_key_hook(data.win, ft_handle_key, &data);
+	mlx_mouse_hook(data.win, ft_handle_mouse, &data);
 	mlx_hook(data.win, 17, 1L, ft_close, NULL);
 	mlx_loop(data.mlx);
 }

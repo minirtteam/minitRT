@@ -6,7 +6,7 @@
 /*   By: hyunghki <hyunghki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 07:35:44 by hyunghki          #+#    #+#             */
-/*   Updated: 2023/07/31 14:43:22 by hyunghki         ###   ########.fr       */
+/*   Updated: 2023/08/04 13:34:03 by hyunghki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,10 @@
 # define F_DATA_OBJS 3
 # define F_LIGHTS 1
 # define F_SP 2
-# define F_PL 3
-# define F_CY 4
-# define F_CN 5
+# define F_PL 4
+# define F_CY 8
+# define F_CN 16
+# define F_BUMP 64
 
 typedef struct s_lst
 {
@@ -74,6 +75,7 @@ typedef struct s_sphere
 	t_vec3	coord;
 	double	radius;
 	t_color	rgb;
+	t_color	checker_rgb;
 }	t_sphere;
 
 typedef struct s_plane
@@ -81,6 +83,7 @@ typedef struct s_plane
 	t_vec3	coord;
 	t_vec3	axis;
 	t_color	rgb;
+	t_color	checker_rgb;
 }	t_plane;
 
 typedef struct s_cy_cn
@@ -90,6 +93,7 @@ typedef struct s_cy_cn
 	double	radius;
 	double	height;
 	t_color	rgb;
+	t_color	checker_rgb;
 }	t_cy_cn;
 
 typedef t_cy_cn	t_cylinder;

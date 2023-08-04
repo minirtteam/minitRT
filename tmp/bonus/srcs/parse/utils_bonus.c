@@ -6,52 +6,13 @@
 /*   By: hyunghki <hyunghki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 06:51:55 by hyunghki          #+#    #+#             */
-/*   Updated: 2023/07/30 15:30:50 by hyunghki         ###   ########.fr       */
+/*   Updated: 2023/08/04 13:34:48 by hyunghki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vector_bonus.h"
 #include "parse_bonus.h"
 #include "utils_bonus.h"
-#include "get_next_line_bonus.h"
-
-static t_lst	*ft_mk_node(char *s)
-{
-	t_lst	*data;
-	t_lst	*ret;
-
-	if (*s == '\0')
-		return (NULL);
-	ret = NULL;
-	data = ft_split_lst(s);
-	ret = mk_lst(data, F_DATA_LST, 0);
-	return (ret);
-}
-
-t_lst	*get_data(char *file_name)
-{
-	t_lst	*ret;
-	t_lst	*to_push;
-	char	*line;
-	int		fd;
-
-	ret = NULL;
-	fd = open(file_name, O_RDONLY);
-	if (fd < 0)
-		ft_error();
-	while (1)
-	{
-		line = get_next_line(fd);
-		if (line == NULL)
-			break ;
-		to_push = ft_mk_node(ft_trim(line));
-		if (to_push != NULL)
-			lst_push(&ret, to_push);
-		free(line);
-	}
-	close(fd);
-	return (ret);
-}
 
 void	ft_get_coord(t_vec3 *coord, char *s)
 {
@@ -117,4 +78,21 @@ void	ft_get_rgb(t_color *rgb, char *s)
 	if (rgb->z < 0 || rgb->z > 255)
 		ft_error();
 	*rgb = vec_devide(*rgb, 255);
+}
+
+void	ft_get_obj_rgb(t_color *rgb, t_color *checker_rgb, char *s)
+{
+	int	i;
+
+	i = ft_str_find(s, '|');
+	if (i != -1)
+		s[i] = '\0';
+	ft_get_rgb(rgb, s);
+	if (i != -1)
+	{
+		s += (i + 1);
+		ft_get_rgb(checker_rgb, s);
+	}
+	else
+		*checker_rgb = *rgb;
 }

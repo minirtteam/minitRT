@@ -6,7 +6,7 @@
 #    By: hyunghki <hyunghki@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/17 17:57:28 by hyunghki          #+#    #+#              #
-#    Updated: 2023/07/31 12:09:44 by hyunghki         ###   ########.fr        #
+#    Updated: 2023/08/04 16:22:41 by hyunghki         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -61,6 +61,8 @@ BSRCS= $(BSRC_DIR)get_next_line/get_next_line_bonus.c \
 	   $(BSRC_DIR)render/print_image_bonus.c \
 	   $(BSRC_DIR)calculate/interface_bonus.c \
 	   $(BSRC_DIR)calculate/hit_chk_bonus.c \
+	   $(BSRC_DIR)calculate/hit_chk2_bonus.c \
+	   $(BSRC_DIR)calculate/u_v_color.c \
 	   $(BSRC_DIR)calculate/hit_chk_utils_bonus.c \
 	   $(BSRC_DIR)calculate/lights_bonus.c \
 	   $(BSRC_DIR)vector/operator_bonus.c \

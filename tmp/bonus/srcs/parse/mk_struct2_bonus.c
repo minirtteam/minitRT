@@ -6,7 +6,7 @@
 /*   By: hyunghki <hyunghki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 09:09:19 by hyunghki          #+#    #+#             */
-/*   Updated: 2023/07/31 14:01:19 by hyunghki         ###   ########.fr       */
+/*   Updated: 2023/08/04 13:37:22 by hyunghki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static t_sphere	*mk_sp(t_lst *target)
 		ft_error();
 	ret->radius /= 2;
 	target = target->nxt;
-	ft_get_rgb(&ret->rgb, target->data);
+	ft_get_obj_rgb(&ret->rgb, &ret->checker_rgb, target->data);
 	return (ret);
 }
 
@@ -38,7 +38,7 @@ static t_plane	*mk_pl(t_lst *target)
 	target = target->nxt;
 	ft_get_axis(&ret->axis, target->data);
 	target = target->nxt;
-	ft_get_rgb(&ret->rgb, target->data);
+	ft_get_obj_rgb(&ret->rgb, &ret->checker_rgb, target->data);
 	return (ret);
 }
 
@@ -60,7 +60,7 @@ static t_cy_cn	*mk_cy_cn(t_lst *target)
 	if (ret->height < 0)
 		ft_error();
 	target = target->nxt;
-	ft_get_rgb(&ret->rgb, target->data);
+	ft_get_obj_rgb(&ret->rgb, &ret->checker_rgb, target->data);
 	return (ret);
 }
 

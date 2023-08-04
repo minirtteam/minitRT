@@ -6,7 +6,7 @@
 /*   By: hyunghki <hyunghki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 07:35:44 by hyunghki          #+#    #+#             */
-/*   Updated: 2023/07/30 15:33:19 by hyunghki         ###   ########.fr       */
+/*   Updated: 2023/08/03 18:18:43 by hyunghki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ typedef struct s_cylinder
 
 typedef struct s_info
 {
+	t_cam	*cam;
 	t_amb	*amb;
 	t_lst	*lights;
 	t_lst	*objs;
@@ -99,5 +100,17 @@ typedef struct s_info
 	t_vec3	v_dir;
 	t_vec3	low_left;
 }	t_info;
+
+typedef struct s_data
+{
+	void		*mlx;
+	void		*win;
+	void		*img;
+	char		*addr;
+	int			bpp;
+	int			line_length;
+	int			endian;
+	t_info		*info;
+}		t_data;
 
 #endif
