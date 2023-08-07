@@ -6,7 +6,7 @@
 /*   By: hyunghki <hyunghki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 06:51:55 by hyunghki          #+#    #+#             */
-/*   Updated: 2023/08/04 13:34:48 by hyunghki         ###   ########.fr       */
+/*   Updated: 2023/08/07 13:10:57 by hyunghki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,5 +94,5 @@ void	ft_get_obj_rgb(t_color *rgb, t_color *checker_rgb, char *s)
 		ft_get_rgb(checker_rgb, s);
 	}
 	else
-		*checker_rgb = *rgb;
+		*checker_rgb = initial_vec(-1, -1, -1);
 }

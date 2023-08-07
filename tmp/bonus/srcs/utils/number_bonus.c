@@ -6,7 +6,7 @@
 /*   By: hyunghki <hyunghki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 10:38:10 by hyunghki          #+#    #+#             */
-/*   Updated: 2023/07/30 15:28:34 by hyunghki         ###   ########.fr       */
+/*   Updated: 2023/08/07 17:35:21 by hyunghki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,4 +54,20 @@ double	ft_atod(char *s)
 	while (n-- > 0)
 		ret /= 10;
 	return (ret);
+}
+
+int	ft_max(double a, double b, double c)
+{
+	if (a > b && a > c)
+		return (0);
+	if (b > a && b > c)
+		return (1);
+	return (2);
+}
+
+double	ft_min(double a, double b)
+{
+	if (a < b)
+		return (a);
+	return (b);
 }

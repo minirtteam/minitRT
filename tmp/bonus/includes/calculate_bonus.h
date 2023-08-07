@@ -6,7 +6,7 @@
 /*   By: hyunghki <hyunghki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 09:39:45 by hyunghki          #+#    #+#             */
-/*   Updated: 2023/08/04 16:50:49 by hyunghki         ###   ########.fr       */
+/*   Updated: 2023/08/07 19:14:48 by hyunghki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,8 @@
 # include "math.h"
 
 # define F_KSN 32
-# define F_KS 0.7
-# define F_IS_DOWN 256
-# define CHECKER_SIZE 2.0
+# define F_KS 0.8
+# define F_IS_UP 256
 
 typedef struct s_rec
 {
@@ -41,8 +40,9 @@ int		cy_side(t_ray *ray, t_cylinder *cy, t_rec *rec, int info);
 int		cn_side(t_ray *ray, t_cone *cn, t_rec *rec, int info);
 int		cy_cn_up_down(t_ray *ray, t_cy_cn *target, t_rec *rec, int info);
 t_color	get_sp_color(t_rec *rec, t_sphere *sp);
-t_color	get_pl_color(t_rec *rec, t_color rgb, t_color checker_rgb);
+t_color	get_pl_color(t_rec *rec, t_vec3 o, t_color rgb, t_color checker_rgb);
 t_color	get_cy_color(t_rec *rec, t_cylinder *cy);
+t_color	get_cy_cn_color(t_rec *rec, t_cy_cn *c, t_vec3 o);
 t_color	get_cn_color(t_rec *rec, t_cone *cn);
 
 #endif

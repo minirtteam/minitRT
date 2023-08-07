@@ -6,7 +6,7 @@
 /*   By: hyunghki <hyunghki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 10:51:54 by hyunghki          #+#    #+#             */
-/*   Updated: 2023/07/29 16:55:15 by hyunghki         ###   ########.fr       */
+/*   Updated: 2023/08/07 16:41:59 by hyunghki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,6 @@ t_lst	*ft_split_lst(char *s);
 void	lst_push(t_lst **target, t_lst *to_push);
 t_lst	*mk_lst(void *data, int data_type, int info);
 void	*ft_lst_free(t_lst *target);
+double	ft_min(double a, double b);
 
 #endif
