@@ -6,7 +6,7 @@
 /*   By: hyunghki <hyunghki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 17:15:46 by hyunghki          #+#    #+#             */
-/*   Updated: 2023/08/07 17:07:20 by hyunghki         ###   ########.fr       */
+/*   Updated: 2023/08/08 12:59:22 by hyunghki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static int	hit_chk_pl(t_ray *ray, t_plane *pl, t_rec *rec, int info)
 	rec->t = root;
 	rec->p = ray_at(ray, rec->t);
 	set_normal(rec, ray, pl->axis, info & F_BUMP);
-	rec->color = get_pl_color(rec, pl->coord, pl->rgb, pl->checker_rgb);
+	rec->color = get_pl_color(rec->p, pl->axis, pl->rgb, pl->checker_rgb);
 	return (1);
 }
 

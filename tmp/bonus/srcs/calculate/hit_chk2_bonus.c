@@ -6,7 +6,7 @@
 /*   By: hyunghki <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 16:44:28 by hyunghki          #+#    #+#             */
-/*   Updated: 2023/08/07 19:14:25 by hyunghki         ###   ########.fr       */
+/*   Updated: 2023/08/08 19:32:31 by hyunghki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,11 @@ int	cy_cn_up_down(t_ray *ray, t_cy_cn *target, t_rec *rec, int info)
 		return (0);
 	rec->t = root;
 	rec->p = p;
-	if (height < 0)
-		set_normal(rec, ray, target->axis, info & F_BUMP);
-	else
+	set_normal(rec, ray, target->axis, info & F_BUMP);
+	if (height > 0)
 		set_normal(rec, ray, vec_multi(target->axis, -1), info & F_BUMP);
-	rec->color = get_cy_cn_color(rec, target, circle);
+	rec->color = get_pl_color(vec_minus(rec->p, circle), \
+			vec_minus(circle, target->coord), target->rgb, target->checker_rgb);
 	return (1);
 }
 
@@ -76,7 +76,7 @@ int	cy_side(t_ray *ray, t_cylinder *cy, t_rec *rec, int info)
 	*rec = tmp_rec;
 	normal = vec_minus(rec->p, vec_plus(cy->coord, vec_multi(cy->axis, v)));
 	set_normal(rec, ray, vec_unit(normal), info & F_BUMP);
-	rec->color = get_cy_color(rec, cy);
+	rec->color = get_cy_cn_color(normal, v, cy);
 	return (1);
 }
 
@@ -103,8 +103,8 @@ int	cn_side(t_ray *ray, t_cone *cn, t_rec *rec, int info)
 	if (v < 0 || v > cn->height)
 		return (0);
 	*rec = tmp_rec;
-	oc = vec_plus(point, vec_multi(cn->axis, cn->height));
 	set_normal(rec, ray, get_cn_normal(rec, cn), info & F_BUMP);
-	rec->color = get_cy_color(rec, cn);
+	rec->color = get_cy_cn_color(vec_minus(rec->p, vec_plus(point, \
+				vec_multi(cn->axis, v))), v, cn);
 	return (1);
 }
