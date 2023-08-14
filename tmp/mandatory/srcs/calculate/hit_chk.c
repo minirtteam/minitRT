@@ -6,7 +6,7 @@
 /*   By: hyunghki <hyunghki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 17:15:46 by hyunghki          #+#    #+#             */
-/*   Updated: 2023/07/31 14:06:03 by hyunghki         ###   ########.fr       */
+/*   Updated: 2023/08/11 15:44:40 by hyunghki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,8 @@ static int	hit_chk_cy(t_ray *ray, t_cylinder *cy, t_rec *rec)
 
 	height = cy->height / 2;
 	return (cy_side(ray, cy, rec) \
-			|| cy_up_down(ray, cy, rec, height) \
-			|| cy_up_down(ray, cy, rec, -height));
+			+ cy_up_down(ray, cy, rec, height) \
+			+ cy_up_down(ray, cy, rec, -height));
 }
 
 int	is_hit(t_ray *ray, t_lst *objs, t_rec *rec)

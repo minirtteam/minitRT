@@ -6,7 +6,7 @@
 /*   By: hyunghki <hyunghki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 17:15:46 by hyunghki          #+#    #+#             */
-/*   Updated: 2023/08/08 12:59:22 by hyunghki         ###   ########.fr       */
+/*   Updated: 2023/08/14 15:54:19 by hyunghki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 static int	hit_chk_sp(t_ray *ray, t_sphere *sp, t_rec *rec, int info)
 {
 	t_vec3	oc;
-	t_vec3	normal;
 
 	oc = vec_minus(ray->origin, sp->coord);
 	if (!is_intersect(rec, \
@@ -25,9 +24,10 @@ static int	hit_chk_sp(t_ray *ray, t_sphere *sp, t_rec *rec, int info)
 		vec_length_squared(oc) - pow(sp->radius, 2)))
 		return (0);
 	rec->p = ray_at(ray, rec->t);
-	normal = vec_devide(vec_minus(rec->p, sp->coord), sp->radius);
-	set_normal(rec, ray, normal, info & F_BUMP);
-	rec->color = get_sp_color(rec, sp);
+	get_sp_uv(rec, sp);
+	rec->normal = vec_devide(vec_minus(rec->p, sp->coord), sp->radius);
+	set_normal(rec, ray, sp->img, info & F_BUMP);
+	rec->color = get_uv_color(rec, sp->rgb, sp->checker_rgb, sp->radius * 12.0);
 	return (1);
 }
 
@@ -44,8 +44,10 @@ static int	hit_chk_pl(t_ray *ray, t_plane *pl, t_rec *rec, int info)
 		return (0);
 	rec->t = root;
 	rec->p = ray_at(ray, rec->t);
-	set_normal(rec, ray, pl->axis, info & F_BUMP);
-	rec->color = get_pl_color(rec->p, pl->axis, pl->rgb, pl->checker_rgb);
+	get_pl_uv(rec, rec->p, pl->axis);
+	rec->normal = pl->axis;
+	set_normal(rec, ray, pl->img, info & F_BUMP);
+	rec->color = get_uv_color(rec, pl->rgb, pl->checker_rgb, 8.0);
 	return (1);
 }
 
@@ -53,10 +55,10 @@ static int	hit_chk_cy_cn(t_ray *ray, t_cy_cn *target, t_rec *rec, int info)
 {
 	if (info & F_CY)
 		return (cy_side(ray, target, rec, info) \
-				|| cy_cn_up_down(ray, target, rec, info) \
-				|| cy_cn_up_down(ray, target, rec, info | F_IS_UP));
+				+ cy_cn_up_down(ray, target, rec, info) \
+				+ cy_cn_up_down(ray, target, rec, info | F_IS_UP));
 	return (cn_side(ray, target, rec, info) \
-			|| cy_cn_up_down(ray, target, rec, info));
+			+ cy_cn_up_down(ray, target, rec, info));
 }
 
 int	is_hit(t_ray *ray, t_lst *objs, t_rec *rec)

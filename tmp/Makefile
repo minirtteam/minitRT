@@ -6,13 +6,13 @@
 #    By: hyunghki <hyunghki@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/17 17:57:28 by hyunghki          #+#    #+#              #
-#    Updated: 2023/08/04 16:22:41 by hyunghki         ###   ########.fr        #
+#    Updated: 2023/08/09 16:57:38 by hyunghki         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME= miniRT
 CFLAGS= -Wall -Werror -Wextra
-DEBUG_FLAGS= -g3 -fsanitize=thread
+DEBUG_FLAGS= -g3 -fsanitize=address
 LDFLAGS= \
 -Lmlx -lmlx -framework OpenGL -framework Appkit \
 -lm
@@ -59,6 +59,7 @@ BSRCS= $(BSRC_DIR)get_next_line/get_next_line_bonus.c \
 	   $(BSRC_DIR)parse/mk_struct2_bonus.c \
 	   $(BSRC_DIR)render/interface_bonus.c \
 	   $(BSRC_DIR)render/print_image_bonus.c \
+	   $(BSRC_DIR)render/get_bump_info_bonus.c \
 	   $(BSRC_DIR)calculate/interface_bonus.c \
 	   $(BSRC_DIR)calculate/hit_chk_bonus.c \
 	   $(BSRC_DIR)calculate/hit_chk2_bonus.c \

@@ -6,7 +6,7 @@
 /*   By: hyunghki <hyunghki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 09:41:10 by hyunghki          #+#    #+#             */
-/*   Updated: 2023/08/03 18:18:04 by hyunghki         ###   ########.fr       */
+/*   Updated: 2023/08/09 16:57:00 by hyunghki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,6 @@
 
 void	ft_render(t_amb *amb, t_cam *cam, t_lst *lights, t_lst *objs);
 void	print_img(t_data *data);
+void	ft_get_bump_info(t_data *data, t_lst *objs);
 
 #endif

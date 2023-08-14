@@ -6,7 +6,7 @@
 /*   By: hyunghki <hyunghki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 09:09:19 by hyunghki          #+#    #+#             */
-/*   Updated: 2023/08/04 13:37:22 by hyunghki         ###   ########.fr       */
+/*   Updated: 2023/08/09 19:12:56 by hyunghki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,9 @@ static t_sphere	*mk_sp(t_lst *target)
 	ret->radius /= 2;
 	target = target->nxt;
 	ft_get_obj_rgb(&ret->rgb, &ret->checker_rgb, target->data);
+	target = target->nxt;
+	if (target != NULL)
+		ret->img = get_bump(target->data);
 	return (ret);
 }
 
@@ -39,6 +42,9 @@ static t_plane	*mk_pl(t_lst *target)
 	ft_get_axis(&ret->axis, target->data);
 	target = target->nxt;
 	ft_get_obj_rgb(&ret->rgb, &ret->checker_rgb, target->data);
+	target = target->nxt;
+	if (target != NULL)
+		ret->img = get_bump(target->data);
 	return (ret);
 }
 
@@ -61,6 +67,9 @@ static t_cy_cn	*mk_cy_cn(t_lst *target)
 		ft_error();
 	target = target->nxt;
 	ft_get_obj_rgb(&ret->rgb, &ret->checker_rgb, target->data);
+	target = target->nxt;
+	if (target != NULL)
+		ret->img = get_bump(target->data);
 	return (ret);
 }
 
@@ -77,6 +86,14 @@ void	ft_parse_objs(t_lst **objs, t_lst *target)
 		to_push = mk_lst(mk_cy_cn(target->nxt), F_DATA_OBJS, F_CY);
 	else if (ft_strcmp(target->data, "cn") == 0 && target->size == 6)
 		to_push = mk_lst(mk_cy_cn(target->nxt), F_DATA_OBJS, F_CN);
+	else if (ft_strcmp(target->data, "sp") == 0 && target->size == 5)
+		to_push = mk_lst(mk_sp(target->nxt), F_DATA_OBJS, F_SP + F_BUMP);
+	else if (ft_strcmp(target->data, "pl") == 0 && target->size == 5)
+		to_push = mk_lst(mk_pl(target->nxt), F_DATA_OBJS, F_PL + F_BUMP);
+	else if (ft_strcmp(target->data, "cy") == 0 && target->size == 7)
+		to_push = mk_lst(mk_cy_cn(target->nxt), F_DATA_OBJS, F_CY + F_BUMP);
+	else if (ft_strcmp(target->data, "cn") == 0 && target->size == 7)
+		to_push = mk_lst(mk_cy_cn(target->nxt), F_DATA_OBJS, F_CN + F_BUMP);
 	else
 		ft_error();
 	lst_push(objs, to_push);

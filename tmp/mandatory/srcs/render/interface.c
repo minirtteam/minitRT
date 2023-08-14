@@ -6,7 +6,7 @@
 /*   By: hyunghki <hyunghki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 09:40:07 by hyunghki          #+#    #+#             */
-/*   Updated: 2023/08/03 18:20:08 by hyunghki         ###   ########.fr       */
+/*   Updated: 2023/08/11 15:44:11 by hyunghki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ static void	ft_initial_info(t_info *info, t_cam *cam, t_amb *amb, t_lst *lights)
 
 	if (vec_length(vec_cross(cam->axis, initial_vec(0, 1, 0))))
 		info->u_dir = vec_unit(vec_cross(cam->axis, initial_vec(0, 1, 0)));
+	else if (cam->axis.y < 0)
+		info->u_dir = vec_unit(vec_cross(cam->axis, initial_vec(0, 0, -1)));
 	else
 		info->u_dir = vec_unit(vec_cross(cam->axis, initial_vec(0, 0, 1)));
 	info->v_dir = vec_unit(vec_cross(info->u_dir, cam->axis));

@@ -6,7 +6,7 @@
 /*   By: hyunghki <hyunghki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 14:47:02 by hyunghki          #+#    #+#             */
-/*   Updated: 2023/07/30 15:44:19 by hyunghki         ###   ########.fr       */
+/*   Updated: 2023/08/14 16:53:44 by hyunghki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static t_color	get_light(t_ray *ray, t_light *light, t_rec *rec, t_info *info)
 	reflect_dir = vec_reflect(vec_multi(light_dir, -1), rec->normal);
 	view_dir = vec_unit(vec_multi(ray->dir, -1));
 	specular = vec_multi(vec_multi(light->rgb, F_KS), \
-			pow(vec_dot(view_dir, reflect_dir), F_KSN));
+			pow(fmax(vec_dot(reflect_dir, view_dir), 0.0), F_KSN));
 	return (vec_multi(vec_plus(diffuse, specular), light->ratio));
 }
 

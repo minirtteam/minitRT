@@ -6,7 +6,7 @@
 /*   By: hyunghki <hyunghki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 10:08:16 by hyunghki          #+#    #+#             */
-/*   Updated: 2023/08/07 16:42:22 by hyunghki         ###   ########.fr       */
+/*   Updated: 2023/08/14 17:25:43 by hyunghki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ int	is_intersect(t_rec *rec, double a, double half_b, double c)
 	if (root_1 == INFINITY && root_2 == INFINITY)
 		return (0);
 	rec->t = ft_min(root_1, root_2);
+	rec->max = rec->t;
 	return (1);
 }
 
@@ -62,7 +63,7 @@ int	cy_up_down(t_ray *ray, t_cylinder *cy, t_rec *rec, double height)
 		return (0);
 	rec->t = root;
 	rec->p = p;
-	if (height > 0)
+	if (height < 0)
 		set_normal(rec, ray, cy->axis);
 	else
 		set_normal(rec, ray, vec_multi(cy->axis, -1));

@@ -6,7 +6,7 @@
 /*   By: hyunghki <hyunghki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 07:35:44 by hyunghki          #+#    #+#             */
-/*   Updated: 2023/08/04 13:34:03 by hyunghki         ###   ########.fr       */
+/*   Updated: 2023/08/11 18:40:57 by hyunghki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,12 +70,26 @@ typedef struct s_light
 	t_color	rgb;
 }	t_light;
 
+typedef struct s_bump
+{
+	void			*img_addr;
+	void			*access_addr;
+	int				bpp;
+	int				line_length;
+	int				endian;
+	char			*file_name;
+	unsigned int	**val;
+	int				width;
+	int				height;
+}	t_bump;
+
 typedef struct s_sphere
 {
 	t_vec3	coord;
 	double	radius;
 	t_color	rgb;
 	t_color	checker_rgb;
+	t_bump	*img;
 }	t_sphere;
 
 typedef struct s_plane
@@ -84,6 +98,7 @@ typedef struct s_plane
 	t_vec3	axis;
 	t_color	rgb;
 	t_color	checker_rgb;
+	t_bump	*img;
 }	t_plane;
 
 typedef struct s_cy_cn
@@ -94,6 +109,7 @@ typedef struct s_cy_cn
 	double	height;
 	t_color	rgb;
 	t_color	checker_rgb;
+	t_bump	*img;
 }	t_cy_cn;
 
 typedef t_cy_cn	t_cylinder;

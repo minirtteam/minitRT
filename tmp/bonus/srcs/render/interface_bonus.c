@@ -6,7 +6,7 @@
 /*   By: hyunghki <hyunghki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 15:29:15 by hyunghki          #+#    #+#             */
-/*   Updated: 2023/08/03 14:59:52 by hyunghki         ###   ########.fr       */
+/*   Updated: 2023/08/11 15:43:38 by hyunghki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ static void	ft_initial_info(t_info *info, t_cam *cam, t_amb *amb, t_lst *lights)
 
 	if (vec_length(vec_cross(cam->axis, initial_vec(0, 1, 0))))
 		info->u_dir = vec_unit(vec_cross(cam->axis, initial_vec(0, 1, 0)));
+	else if (cam->axis.y < 0)
+		info->u_dir = vec_unit(vec_cross(cam->axis, initial_vec(0, 0, -1)));
 	else
 		info->u_dir = vec_unit(vec_cross(cam->axis, initial_vec(0, 0, 1)));
 	info->v_dir = vec_unit(vec_cross(info->u_dir, cam->axis));
@@ -106,10 +108,11 @@ void	ft_render(t_amb *amb, t_cam *cam, t_lst *lights, t_lst *objs)
 		ft_error();
 	data.addr = mlx_get_data_addr(data.img, &data.bpp, \
 			&data.line_length, &data.endian);
-	ft_create_mutex(&data);
 	ft_initial_info(&info, cam, amb, lights);
+	ft_get_bump_info(&data, objs);
 	info.objs = objs;
 	data.info = &info;
+	ft_create_mutex(&data);
 	print_img(&data);
 	mlx_key_hook(data.win, ft_handle_key, &data);
 	mlx_mouse_hook(data.win, ft_handle_mouse, &data);
